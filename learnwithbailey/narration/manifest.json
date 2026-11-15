@@ -1,0 +1,1032 @@
+{
+  "app": "Cool Kids University Learn with Bailey",
+  "voice": {
+    "provider": "ElevenLabs",
+    "name": "Chloe (Cool Kids University)",
+    "voice_id": "sLnQIEn2SvPVPmpkAmlE",
+    "pace": "slow and clear for beginning readers"
+  },
+  "status": "scripts prepared; audio files pending generation",
+  "items": [
+    {
+      "id": "letters_01_question",
+      "category": "letters",
+      "type": "question",
+      "text": "Which letter makes the /m/ sound?",
+      "asset": "audio/letters_01_question.mp3"
+    },
+    {
+      "id": "letters_01_correct",
+      "category": "letters",
+      "type": "correct",
+      "text": "Wonderful! The letter M makes the mmm sound.",
+      "asset": "audio/letters_01_correct.mp3"
+    },
+    {
+      "id": "letters_01_retry",
+      "category": "letters",
+      "type": "retry",
+      "text": "Nice try. The letter M makes the mmm sound.",
+      "asset": "audio/letters_01_retry.mp3"
+    },
+    {
+      "id": "letters_02_question",
+      "category": "letters",
+      "type": "question",
+      "text": "Find the letter B.",
+      "asset": "audio/letters_02_question.mp3"
+    },
+    {
+      "id": "letters_02_correct",
+      "category": "letters",
+      "type": "correct",
+      "text": "Wonderful! B says buh.",
+      "asset": "audio/letters_02_correct.mp3"
+    },
+    {
+      "id": "letters_02_retry",
+      "category": "letters",
+      "type": "retry",
+      "text": "Nice try. B says buh.",
+      "asset": "audio/letters_02_retry.mp3"
+    },
+    {
+      "id": "letters_03_question",
+      "category": "letters",
+      "type": "question",
+      "text": "Which letter makes the /s/ sound?",
+      "asset": "audio/letters_03_question.mp3"
+    },
+    {
+      "id": "letters_03_correct",
+      "category": "letters",
+      "type": "correct",
+      "text": "Wonderful! S makes a sss sound.",
+      "asset": "audio/letters_03_correct.mp3"
+    },
+    {
+      "id": "letters_03_retry",
+      "category": "letters",
+      "type": "retry",
+      "text": "Nice try. S makes a sss sound.",
+      "asset": "audio/letters_03_retry.mp3"
+    },
+    {
+      "id": "letters_04_question",
+      "category": "letters",
+      "type": "question",
+      "text": "Find the letter A.",
+      "asset": "audio/letters_04_question.mp3"
+    },
+    {
+      "id": "letters_04_correct",
+      "category": "letters",
+      "type": "correct",
+      "text": "Wonderful! A is a vowel.",
+      "asset": "audio/letters_04_correct.mp3"
+    },
+    {
+      "id": "letters_04_retry",
+      "category": "letters",
+      "type": "retry",
+      "text": "Nice try. A is a vowel.",
+      "asset": "audio/letters_04_retry.mp3"
+    },
+    {
+      "id": "letters_05_question",
+      "category": "letters",
+      "type": "question",
+      "text": "Which letter makes the /t/ sound?",
+      "asset": "audio/letters_05_question.mp3"
+    },
+    {
+      "id": "letters_05_correct",
+      "category": "letters",
+      "type": "correct",
+      "text": "Wonderful! T makes the tuh sound.",
+      "asset": "audio/letters_05_correct.mp3"
+    },
+    {
+      "id": "letters_05_retry",
+      "category": "letters",
+      "type": "retry",
+      "text": "Nice try. T makes the tuh sound.",
+      "asset": "audio/letters_05_retry.mp3"
+    },
+    {
+      "id": "letters_06_question",
+      "category": "letters",
+      "type": "question",
+      "text": "Find the lowercase p.",
+      "asset": "audio/letters_06_question.mp3"
+    },
+    {
+      "id": "letters_06_correct",
+      "category": "letters",
+      "type": "correct",
+      "text": "Wonderful! That is lowercase p.",
+      "asset": "audio/letters_06_correct.mp3"
+    },
+    {
+      "id": "letters_06_retry",
+      "category": "letters",
+      "type": "retry",
+      "text": "Nice try. That is lowercase p.",
+      "asset": "audio/letters_06_retry.mp3"
+    },
+    {
+      "id": "letters_07_question",
+      "category": "letters",
+      "type": "question",
+      "text": "Which letter makes the /f/ sound?",
+      "asset": "audio/letters_07_question.mp3"
+    },
+    {
+      "id": "letters_07_correct",
+      "category": "letters",
+      "type": "correct",
+      "text": "Wonderful! F makes the fff sound.",
+      "asset": "audio/letters_07_correct.mp3"
+    },
+    {
+      "id": "letters_07_retry",
+      "category": "letters",
+      "type": "retry",
+      "text": "Nice try. F makes the fff sound.",
+      "asset": "audio/letters_07_retry.mp3"
+    },
+    {
+      "id": "letters_08_question",
+      "category": "letters",
+      "type": "question",
+      "text": "Find the letter C.",
+      "asset": "audio/letters_08_question.mp3"
+    },
+    {
+      "id": "letters_08_correct",
+      "category": "letters",
+      "type": "correct",
+      "text": "Wonderful! C can make the kuh sound.",
+      "asset": "audio/letters_08_correct.mp3"
+    },
+    {
+      "id": "letters_08_retry",
+      "category": "letters",
+      "type": "retry",
+      "text": "Nice try. C can make the kuh sound.",
+      "asset": "audio/letters_08_retry.mp3"
+    },
+    {
+      "id": "phonics_01_question",
+      "category": "phonics",
+      "type": "question",
+      "text": "What sound starts the word SUN?",
+      "asset": "audio/phonics_01_question.mp3"
+    },
+    {
+      "id": "phonics_01_correct",
+      "category": "phonics",
+      "type": "correct",
+      "text": "Wonderful! Sun begins with sss.",
+      "asset": "audio/phonics_01_correct.mp3"
+    },
+    {
+      "id": "phonics_01_retry",
+      "category": "phonics",
+      "type": "retry",
+      "text": "Nice try. Sun begins with sss.",
+      "asset": "audio/phonics_01_retry.mp3"
+    },
+    {
+      "id": "phonics_02_question",
+      "category": "phonics",
+      "type": "question",
+      "text": "What sound starts the word CAT?",
+      "asset": "audio/phonics_02_question.mp3"
+    },
+    {
+      "id": "phonics_02_correct",
+      "category": "phonics",
+      "type": "correct",
+      "text": "Wonderful! Cat begins with kuh.",
+      "asset": "audio/phonics_02_correct.mp3"
+    },
+    {
+      "id": "phonics_02_retry",
+      "category": "phonics",
+      "type": "retry",
+      "text": "Nice try. Cat begins with kuh.",
+      "asset": "audio/phonics_02_retry.mp3"
+    },
+    {
+      "id": "phonics_03_question",
+      "category": "phonics",
+      "type": "question",
+      "text": "What sound starts the word DOG?",
+      "asset": "audio/phonics_03_question.mp3"
+    },
+    {
+      "id": "phonics_03_correct",
+      "category": "phonics",
+      "type": "correct",
+      "text": "Wonderful! Dog begins with duh.",
+      "asset": "audio/phonics_03_correct.mp3"
+    },
+    {
+      "id": "phonics_03_retry",
+      "category": "phonics",
+      "type": "retry",
+      "text": "Nice try. Dog begins with duh.",
+      "asset": "audio/phonics_03_retry.mp3"
+    },
+    {
+      "id": "phonics_04_question",
+      "category": "phonics",
+      "type": "question",
+      "text": "What sound starts the word MAP?",
+      "asset": "audio/phonics_04_question.mp3"
+    },
+    {
+      "id": "phonics_04_correct",
+      "category": "phonics",
+      "type": "correct",
+      "text": "Wonderful! Map begins with mmm.",
+      "asset": "audio/phonics_04_correct.mp3"
+    },
+    {
+      "id": "phonics_04_retry",
+      "category": "phonics",
+      "type": "retry",
+      "text": "Nice try. Map begins with mmm.",
+      "asset": "audio/phonics_04_retry.mp3"
+    },
+    {
+      "id": "phonics_05_question",
+      "category": "phonics",
+      "type": "question",
+      "text": "What sound starts the word FISH?",
+      "asset": "audio/phonics_05_question.mp3"
+    },
+    {
+      "id": "phonics_05_correct",
+      "category": "phonics",
+      "type": "correct",
+      "text": "Wonderful! Fish begins with fff.",
+      "asset": "audio/phonics_05_correct.mp3"
+    },
+    {
+      "id": "phonics_05_retry",
+      "category": "phonics",
+      "type": "retry",
+      "text": "Nice try. Fish begins with fff.",
+      "asset": "audio/phonics_05_retry.mp3"
+    },
+    {
+      "id": "phonics_06_question",
+      "category": "phonics",
+      "type": "question",
+      "text": "Which word begins with /b/?",
+      "asset": "audio/phonics_06_question.mp3"
+    },
+    {
+      "id": "phonics_06_correct",
+      "category": "phonics",
+      "type": "correct",
+      "text": "Wonderful! Ball starts with buh.",
+      "asset": "audio/phonics_06_correct.mp3"
+    },
+    {
+      "id": "phonics_06_retry",
+      "category": "phonics",
+      "type": "retry",
+      "text": "Nice try. Ball starts with buh.",
+      "asset": "audio/phonics_06_retry.mp3"
+    },
+    {
+      "id": "phonics_07_question",
+      "category": "phonics",
+      "type": "question",
+      "text": "Which word starts with /sh/?",
+      "asset": "audio/phonics_07_question.mp3"
+    },
+    {
+      "id": "phonics_07_correct",
+      "category": "phonics",
+      "type": "correct",
+      "text": "Wonderful! Ship starts with shh.",
+      "asset": "audio/phonics_07_correct.mp3"
+    },
+    {
+      "id": "phonics_07_retry",
+      "category": "phonics",
+      "type": "retry",
+      "text": "Nice try. Ship starts with shh.",
+      "asset": "audio/phonics_07_retry.mp3"
+    },
+    {
+      "id": "phonics_08_question",
+      "category": "phonics",
+      "type": "question",
+      "text": "Which word begins with /ch/?",
+      "asset": "audio/phonics_08_question.mp3"
+    },
+    {
+      "id": "phonics_08_correct",
+      "category": "phonics",
+      "type": "correct",
+      "text": "Wonderful! Chair starts with ch.",
+      "asset": "audio/phonics_08_correct.mp3"
+    },
+    {
+      "id": "phonics_08_retry",
+      "category": "phonics",
+      "type": "retry",
+      "text": "Nice try. Chair starts with ch.",
+      "asset": "audio/phonics_08_retry.mp3"
+    },
+    {
+      "id": "words_01_question",
+      "category": "words",
+      "type": "question",
+      "text": "Complete the word: C _ T",
+      "asset": "audio/words_01_question.mp3"
+    },
+    {
+      "id": "words_01_correct",
+      "category": "words",
+      "type": "correct",
+      "text": "Wonderful! C A T spells cat.",
+      "asset": "audio/words_01_correct.mp3"
+    },
+    {
+      "id": "words_01_retry",
+      "category": "words",
+      "type": "retry",
+      "text": "Nice try. C A T spells cat.",
+      "asset": "audio/words_01_retry.mp3"
+    },
+    {
+      "id": "words_02_question",
+      "category": "words",
+      "type": "question",
+      "text": "Complete the word: D _ G",
+      "asset": "audio/words_02_question.mp3"
+    },
+    {
+      "id": "words_02_correct",
+      "category": "words",
+      "type": "correct",
+      "text": "Wonderful! D O G spells dog.",
+      "asset": "audio/words_02_correct.mp3"
+    },
+    {
+      "id": "words_02_retry",
+      "category": "words",
+      "type": "retry",
+      "text": "Nice try. D O G spells dog.",
+      "asset": "audio/words_02_retry.mp3"
+    },
+    {
+      "id": "words_03_question",
+      "category": "words",
+      "type": "question",
+      "text": "Complete the word: S _ N",
+      "asset": "audio/words_03_question.mp3"
+    },
+    {
+      "id": "words_03_correct",
+      "category": "words",
+      "type": "correct",
+      "text": "Wonderful! S U N spells sun.",
+      "asset": "audio/words_03_correct.mp3"
+    },
+    {
+      "id": "words_03_retry",
+      "category": "words",
+      "type": "retry",
+      "text": "Nice try. S U N spells sun.",
+      "asset": "audio/words_03_retry.mp3"
+    },
+    {
+      "id": "words_04_question",
+      "category": "words",
+      "type": "question",
+      "text": "What word do C + A + P make?",
+      "asset": "audio/words_04_question.mp3"
+    },
+    {
+      "id": "words_04_correct",
+      "category": "words",
+      "type": "correct",
+      "text": "Wonderful! C A P spells cap.",
+      "asset": "audio/words_04_correct.mp3"
+    },
+    {
+      "id": "words_04_retry",
+      "category": "words",
+      "type": "retry",
+      "text": "Nice try. C A P spells cap.",
+      "asset": "audio/words_04_retry.mp3"
+    },
+    {
+      "id": "words_05_question",
+      "category": "words",
+      "type": "question",
+      "text": "Complete the word: P _ G",
+      "asset": "audio/words_05_question.mp3"
+    },
+    {
+      "id": "words_05_correct",
+      "category": "words",
+      "type": "correct",
+      "text": "Wonderful! P I G spells pig.",
+      "asset": "audio/words_05_correct.mp3"
+    },
+    {
+      "id": "words_05_retry",
+      "category": "words",
+      "type": "retry",
+      "text": "Nice try. P I G spells pig.",
+      "asset": "audio/words_05_retry.mp3"
+    },
+    {
+      "id": "words_06_question",
+      "category": "words",
+      "type": "question",
+      "text": "What word do B + U + S make?",
+      "asset": "audio/words_06_question.mp3"
+    },
+    {
+      "id": "words_06_correct",
+      "category": "words",
+      "type": "correct",
+      "text": "Wonderful! B U S spells bus.",
+      "asset": "audio/words_06_correct.mp3"
+    },
+    {
+      "id": "words_06_retry",
+      "category": "words",
+      "type": "retry",
+      "text": "Nice try. B U S spells bus.",
+      "asset": "audio/words_06_retry.mp3"
+    },
+    {
+      "id": "words_07_question",
+      "category": "words",
+      "type": "question",
+      "text": "Complete the word: H _ N",
+      "asset": "audio/words_07_question.mp3"
+    },
+    {
+      "id": "words_07_correct",
+      "category": "words",
+      "type": "correct",
+      "text": "Wonderful! H E N spells hen.",
+      "asset": "audio/words_07_correct.mp3"
+    },
+    {
+      "id": "words_07_retry",
+      "category": "words",
+      "type": "retry",
+      "text": "Nice try. H E N spells hen.",
+      "asset": "audio/words_07_retry.mp3"
+    },
+    {
+      "id": "words_08_question",
+      "category": "words",
+      "type": "question",
+      "text": "What word do R + A + N make?",
+      "asset": "audio/words_08_question.mp3"
+    },
+    {
+      "id": "words_08_correct",
+      "category": "words",
+      "type": "correct",
+      "text": "Wonderful! R A N spells ran.",
+      "asset": "audio/words_08_correct.mp3"
+    },
+    {
+      "id": "words_08_retry",
+      "category": "words",
+      "type": "retry",
+      "text": "Nice try. R A N spells ran.",
+      "asset": "audio/words_08_retry.mp3"
+    },
+    {
+      "id": "sight_01_question",
+      "category": "sight",
+      "type": "question",
+      "text": "Find the word “the”.",
+      "asset": "audio/sight_01_question.mp3"
+    },
+    {
+      "id": "sight_01_correct",
+      "category": "sight",
+      "type": "correct",
+      "text": "Wonderful! You found the word the.",
+      "asset": "audio/sight_01_correct.mp3"
+    },
+    {
+      "id": "sight_01_retry",
+      "category": "sight",
+      "type": "retry",
+      "text": "Nice try. You found the word the.",
+      "asset": "audio/sight_01_retry.mp3"
+    },
+    {
+      "id": "sight_02_question",
+      "category": "sight",
+      "type": "question",
+      "text": "Find the word “and”.",
+      "asset": "audio/sight_02_question.mp3"
+    },
+    {
+      "id": "sight_02_correct",
+      "category": "sight",
+      "type": "correct",
+      "text": "Wonderful! You found and.",
+      "asset": "audio/sight_02_correct.mp3"
+    },
+    {
+      "id": "sight_02_retry",
+      "category": "sight",
+      "type": "retry",
+      "text": "Nice try. You found and.",
+      "asset": "audio/sight_02_retry.mp3"
+    },
+    {
+      "id": "sight_03_question",
+      "category": "sight",
+      "type": "question",
+      "text": "Find the word “you”.",
+      "asset": "audio/sight_03_question.mp3"
+    },
+    {
+      "id": "sight_03_correct",
+      "category": "sight",
+      "type": "correct",
+      "text": "Wonderful! You found you.",
+      "asset": "audio/sight_03_correct.mp3"
+    },
+    {
+      "id": "sight_03_retry",
+      "category": "sight",
+      "type": "retry",
+      "text": "Nice try. You found you.",
+      "asset": "audio/sight_03_retry.mp3"
+    },
+    {
+      "id": "sight_04_question",
+      "category": "sight",
+      "type": "question",
+      "text": "Find the word “said”.",
+      "asset": "audio/sight_04_question.mp3"
+    },
+    {
+      "id": "sight_04_correct",
+      "category": "sight",
+      "type": "correct",
+      "text": "Wonderful! You found said.",
+      "asset": "audio/sight_04_correct.mp3"
+    },
+    {
+      "id": "sight_04_retry",
+      "category": "sight",
+      "type": "retry",
+      "text": "Nice try. You found said.",
+      "asset": "audio/sight_04_retry.mp3"
+    },
+    {
+      "id": "sight_05_question",
+      "category": "sight",
+      "type": "question",
+      "text": "Find the word “come”.",
+      "asset": "audio/sight_05_question.mp3"
+    },
+    {
+      "id": "sight_05_correct",
+      "category": "sight",
+      "type": "correct",
+      "text": "Wonderful! You found come.",
+      "asset": "audio/sight_05_correct.mp3"
+    },
+    {
+      "id": "sight_05_retry",
+      "category": "sight",
+      "type": "retry",
+      "text": "Nice try. You found come.",
+      "asset": "audio/sight_05_retry.mp3"
+    },
+    {
+      "id": "sight_06_question",
+      "category": "sight",
+      "type": "question",
+      "text": "Find the word “they”.",
+      "asset": "audio/sight_06_question.mp3"
+    },
+    {
+      "id": "sight_06_correct",
+      "category": "sight",
+      "type": "correct",
+      "text": "Wonderful! You found they.",
+      "asset": "audio/sight_06_correct.mp3"
+    },
+    {
+      "id": "sight_06_retry",
+      "category": "sight",
+      "type": "retry",
+      "text": "Nice try. You found they.",
+      "asset": "audio/sight_06_retry.mp3"
+    },
+    {
+      "id": "sight_07_question",
+      "category": "sight",
+      "type": "question",
+      "text": "Find the word “where”.",
+      "asset": "audio/sight_07_question.mp3"
+    },
+    {
+      "id": "sight_07_correct",
+      "category": "sight",
+      "type": "correct",
+      "text": "Wonderful! You found where.",
+      "asset": "audio/sight_07_correct.mp3"
+    },
+    {
+      "id": "sight_07_retry",
+      "category": "sight",
+      "type": "retry",
+      "text": "Nice try. You found where.",
+      "asset": "audio/sight_07_retry.mp3"
+    },
+    {
+      "id": "sight_08_question",
+      "category": "sight",
+      "type": "question",
+      "text": "Find the word “little”.",
+      "asset": "audio/sight_08_question.mp3"
+    },
+    {
+      "id": "sight_08_correct",
+      "category": "sight",
+      "type": "correct",
+      "text": "Wonderful! You found little.",
+      "asset": "audio/sight_08_correct.mp3"
+    },
+    {
+      "id": "sight_08_retry",
+      "category": "sight",
+      "type": "retry",
+      "text": "Nice try. You found little.",
+      "asset": "audio/sight_08_retry.mp3"
+    },
+    {
+      "id": "stories_01_story",
+      "category": "stories",
+      "type": "story",
+      "text": "Bailey sees a red kite. The wind blows. The kite goes up, up, up! Bailey smiles.",
+      "asset": "audio/stories_01_story.mp3"
+    },
+    {
+      "id": "stories_01_question",
+      "category": "stories",
+      "type": "question",
+      "text": "What color is the kite?",
+      "asset": "audio/stories_01_question.mp3"
+    },
+    {
+      "id": "stories_01_correct",
+      "category": "stories",
+      "type": "correct",
+      "text": "Wonderful! Bailey sees a red kite.",
+      "asset": "audio/stories_01_correct.mp3"
+    },
+    {
+      "id": "stories_01_retry",
+      "category": "stories",
+      "type": "retry",
+      "text": "Nice try. Bailey sees a red kite.",
+      "asset": "audio/stories_01_retry.mp3"
+    },
+    {
+      "id": "stories_02_story",
+      "category": "stories",
+      "type": "story",
+      "text": "A little frog sits on a log. It sees a bug. Hop! The frog jumps into the pond.",
+      "asset": "audio/stories_02_story.mp3"
+    },
+    {
+      "id": "stories_02_question",
+      "category": "stories",
+      "type": "question",
+      "text": "Where does the frog sit?",
+      "asset": "audio/stories_02_question.mp3"
+    },
+    {
+      "id": "stories_02_correct",
+      "category": "stories",
+      "type": "correct",
+      "text": "Wonderful! The frog sits on a log.",
+      "asset": "audio/stories_02_correct.mp3"
+    },
+    {
+      "id": "stories_02_retry",
+      "category": "stories",
+      "type": "retry",
+      "text": "Nice try. The frog sits on a log.",
+      "asset": "audio/stories_02_retry.mp3"
+    },
+    {
+      "id": "stories_03_story",
+      "category": "stories",
+      "type": "story",
+      "text": "Mia has three apples. She gives one apple to her friend. Now Mia has two apples.",
+      "asset": "audio/stories_03_story.mp3"
+    },
+    {
+      "id": "stories_03_question",
+      "category": "stories",
+      "type": "question",
+      "text": "How many apples does Mia have now?",
+      "asset": "audio/stories_03_question.mp3"
+    },
+    {
+      "id": "stories_03_correct",
+      "category": "stories",
+      "type": "correct",
+      "text": "Wonderful! Three apples minus one leaves two.",
+      "asset": "audio/stories_03_correct.mp3"
+    },
+    {
+      "id": "stories_03_retry",
+      "category": "stories",
+      "type": "retry",
+      "text": "Nice try. Three apples minus one leaves two.",
+      "asset": "audio/stories_03_retry.mp3"
+    },
+    {
+      "id": "stories_04_story",
+      "category": "stories",
+      "type": "story",
+      "text": "Sam has a small dog named Pip. Pip loves to run. Sam throws a ball and Pip brings it back.",
+      "asset": "audio/stories_04_story.mp3"
+    },
+    {
+      "id": "stories_04_question",
+      "category": "stories",
+      "type": "question",
+      "text": "What does Pip bring back?",
+      "asset": "audio/stories_04_question.mp3"
+    },
+    {
+      "id": "stories_04_correct",
+      "category": "stories",
+      "type": "correct",
+      "text": "Wonderful! Pip brings back the ball.",
+      "asset": "audio/stories_04_correct.mp3"
+    },
+    {
+      "id": "stories_04_retry",
+      "category": "stories",
+      "type": "retry",
+      "text": "Nice try. Pip brings back the ball.",
+      "asset": "audio/stories_04_retry.mp3"
+    },
+    {
+      "id": "stories_05_story",
+      "category": "stories",
+      "type": "story",
+      "text": "It is raining outside. Bailey puts on her boots and takes an umbrella. She walks to the library.",
+      "asset": "audio/stories_05_story.mp3"
+    },
+    {
+      "id": "stories_05_question",
+      "category": "stories",
+      "type": "question",
+      "text": "Where is Bailey going?",
+      "asset": "audio/stories_05_question.mp3"
+    },
+    {
+      "id": "stories_05_correct",
+      "category": "stories",
+      "type": "correct",
+      "text": "Wonderful! Bailey walks to the library.",
+      "asset": "audio/stories_05_correct.mp3"
+    },
+    {
+      "id": "stories_05_retry",
+      "category": "stories",
+      "type": "retry",
+      "text": "Nice try. Bailey walks to the library.",
+      "asset": "audio/stories_05_retry.mp3"
+    },
+    {
+      "id": "stories_06_story",
+      "category": "stories",
+      "type": "story",
+      "text": "A seed rests in the soil. The sun shines and rain falls. Soon, a green sprout begins to grow.",
+      "asset": "audio/stories_06_story.mp3"
+    },
+    {
+      "id": "stories_06_question",
+      "category": "stories",
+      "type": "question",
+      "text": "What helps the seed grow?",
+      "asset": "audio/stories_06_question.mp3"
+    },
+    {
+      "id": "stories_06_correct",
+      "category": "stories",
+      "type": "correct",
+      "text": "Wonderful! Sunshine and rain help the seed grow.",
+      "asset": "audio/stories_06_correct.mp3"
+    },
+    {
+      "id": "stories_06_retry",
+      "category": "stories",
+      "type": "retry",
+      "text": "Nice try. Sunshine and rain help the seed grow.",
+      "asset": "audio/stories_06_retry.mp3"
+    },
+    {
+      "id": "rhymes_01_question",
+      "category": "rhymes",
+      "type": "question",
+      "text": "Which word rhymes with CAT?",
+      "asset": "audio/rhymes_01_question.mp3"
+    },
+    {
+      "id": "rhymes_01_correct",
+      "category": "rhymes",
+      "type": "correct",
+      "text": "Wonderful! Cat and hat rhyme.",
+      "asset": "audio/rhymes_01_correct.mp3"
+    },
+    {
+      "id": "rhymes_01_retry",
+      "category": "rhymes",
+      "type": "retry",
+      "text": "Nice try. Cat and hat rhyme.",
+      "asset": "audio/rhymes_01_retry.mp3"
+    },
+    {
+      "id": "rhymes_02_question",
+      "category": "rhymes",
+      "type": "question",
+      "text": "Which word rhymes with LOG?",
+      "asset": "audio/rhymes_02_question.mp3"
+    },
+    {
+      "id": "rhymes_02_correct",
+      "category": "rhymes",
+      "type": "correct",
+      "text": "Wonderful! Log and frog rhyme.",
+      "asset": "audio/rhymes_02_correct.mp3"
+    },
+    {
+      "id": "rhymes_02_retry",
+      "category": "rhymes",
+      "type": "retry",
+      "text": "Nice try. Log and frog rhyme.",
+      "asset": "audio/rhymes_02_retry.mp3"
+    },
+    {
+      "id": "rhymes_03_question",
+      "category": "rhymes",
+      "type": "question",
+      "text": "Which word rhymes with SUN?",
+      "asset": "audio/rhymes_03_question.mp3"
+    },
+    {
+      "id": "rhymes_03_correct",
+      "category": "rhymes",
+      "type": "correct",
+      "text": "Wonderful! Sun and fun rhyme.",
+      "asset": "audio/rhymes_03_correct.mp3"
+    },
+    {
+      "id": "rhymes_03_retry",
+      "category": "rhymes",
+      "type": "retry",
+      "text": "Nice try. Sun and fun rhyme.",
+      "asset": "audio/rhymes_03_retry.mp3"
+    },
+    {
+      "id": "rhymes_04_question",
+      "category": "rhymes",
+      "type": "question",
+      "text": "Which word rhymes with BELL?",
+      "asset": "audio/rhymes_04_question.mp3"
+    },
+    {
+      "id": "rhymes_04_correct",
+      "category": "rhymes",
+      "type": "correct",
+      "text": "Wonderful! Bell and shell rhyme.",
+      "asset": "audio/rhymes_04_correct.mp3"
+    },
+    {
+      "id": "rhymes_04_retry",
+      "category": "rhymes",
+      "type": "retry",
+      "text": "Nice try. Bell and shell rhyme.",
+      "asset": "audio/rhymes_04_retry.mp3"
+    },
+    {
+      "id": "rhymes_05_question",
+      "category": "rhymes",
+      "type": "question",
+      "text": "Which word rhymes with CAKE?",
+      "asset": "audio/rhymes_05_question.mp3"
+    },
+    {
+      "id": "rhymes_05_correct",
+      "category": "rhymes",
+      "type": "correct",
+      "text": "Wonderful! Cake and lake rhyme.",
+      "asset": "audio/rhymes_05_correct.mp3"
+    },
+    {
+      "id": "rhymes_05_retry",
+      "category": "rhymes",
+      "type": "retry",
+      "text": "Nice try. Cake and lake rhyme.",
+      "asset": "audio/rhymes_05_retry.mp3"
+    },
+    {
+      "id": "rhymes_06_question",
+      "category": "rhymes",
+      "type": "question",
+      "text": "Which word rhymes with TREE?",
+      "asset": "audio/rhymes_06_question.mp3"
+    },
+    {
+      "id": "rhymes_06_correct",
+      "category": "rhymes",
+      "type": "correct",
+      "text": "Wonderful! Tree and bee rhyme.",
+      "asset": "audio/rhymes_06_correct.mp3"
+    },
+    {
+      "id": "rhymes_06_retry",
+      "category": "rhymes",
+      "type": "retry",
+      "text": "Nice try. Tree and bee rhyme.",
+      "asset": "audio/rhymes_06_retry.mp3"
+    },
+    {
+      "id": "rhymes_07_question",
+      "category": "rhymes",
+      "type": "question",
+      "text": "Which word rhymes with BOAT?",
+      "asset": "audio/rhymes_07_question.mp3"
+    },
+    {
+      "id": "rhymes_07_correct",
+      "category": "rhymes",
+      "type": "correct",
+      "text": "Wonderful! Boat and goat rhyme.",
+      "asset": "audio/rhymes_07_correct.mp3"
+    },
+    {
+      "id": "rhymes_07_retry",
+      "category": "rhymes",
+      "type": "retry",
+      "text": "Nice try. Boat and goat rhyme.",
+      "asset": "audio/rhymes_07_retry.mp3"
+    },
+    {
+      "id": "rhymes_08_question",
+      "category": "rhymes",
+      "type": "question",
+      "text": "Which word rhymes with STAR?",
+      "asset": "audio/rhymes_08_question.mp3"
+    },
+    {
+      "id": "rhymes_08_correct",
+      "category": "rhymes",
+      "type": "correct",
+      "text": "Wonderful! Star and car rhyme.",
+      "asset": "audio/rhymes_08_correct.mp3"
+    },
+    {
+      "id": "rhymes_08_retry",
+      "category": "rhymes",
+      "type": "retry",
+      "text": "Nice try. Star and car rhyme.",
+      "asset": "audio/rhymes_08_retry.mp3"
+    },
+    {
+      "id": "completion",
+      "type": "completion",
+      "text": "You did it! I am so proud of you. Keep reading and keep growing!",
+      "asset": "audio/completion.mp3"
+    },
+    {
+      "id": "welcome",
+      "type": "welcome",
+      "text": "Hello, reader! Welcome to Learn with Bailey. We will take our time, sound out each word, and learn together.",
+      "asset": "audio/welcome.mp3"
+    }
+  ]
+}
