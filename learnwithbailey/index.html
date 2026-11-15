@@ -46,8 +46,13 @@ function voiceStatus(message){const e=document.getElementById('voice-status');if
 async function loadJessica(){
  if(!kokoroModelPromise){
   kokoroModelPromise=(async()=>{
-   const module=await import('https://esm.sh/kokoro-js@1.2.1?bundle');
-   return module.KokoroTTS.from_pretrained('onnx-community/Kokoro-82M-v1.0-ONNX',{dtype:'q8',device:'wasm'});
+   let KokoroTTS;
+   let importError;
+   for(const url of ['https://cdn.jsdelivr.net/npm/kokoro-js@1.2.1/+esm','https://esm.sh/kokoro-js@1.2.1?bundle']){
+    try{const mod=await import(url);if(mod.KokoroTTS){KokoroTTS=mod.KokoroTTS;break}else throw new Error('KokoroTTS export missing')}catch(e){importError=e;console.warn('Voice library source unavailable',url,e)}
+   }
+   if(!KokoroTTS)throw new Error('Voice library download failed: '+(importError?.message||'unknown error'));
+   return KokoroTTS.from_pretrained('onnx-community/Kokoro-82M-v1.0-ONNX',{dtype:'q8',device:'wasm'});
   })().catch(e=>{kokoroModelPromise=null;throw e});
  }
  return kokoroModelPromise;
@@ -70,7 +75,7 @@ async function narrate(s){
   await activeAudio.play();
  }catch(e){
   console.error('Kokoro Jessica playback unavailable',e);
-  if(request===speechRequest)voiceStatus('Jessica’s voice could not load. Check your internet connection and try Listen again. The computer voice is disabled.');
+  if(request===speechRequest)voiceStatus('Jessica could not start: '+String(e?.message||e).slice(0,220)+'. Try the Listen button again. No computer voice will be used.');
  }
 }
 function refreshHeader(){document.getElementById('topstars').textContent='★ '+state.stars+' stars';document.getElementById('toplessons').textContent=Object.keys(state.completed).length+' lessons completed'}
