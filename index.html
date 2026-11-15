@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cool Kids University Apps</title>
+<meta name="description" content="Learning apps starring the Cool Kids from Cool Kids University. Where stories spark learning.">
+<meta name="theme-color" content="#8B3DFF">
+<link rel="icon" type="image/png" href="assets/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#8B3DFF;--purpleD:#5A1FC2;--blue:#1E5BFF;--coral:#FF6B57;--orange:#FF8A1F;--teal:#12B5A6;--green:#22B84B;--red:#E8323C;--yellow:#FFC914;--gold:#E0A800;--ink:#1F2440;--soft:#4A4F6A;--cream:#FFF8EC}
+*{box-sizing:border-box}
+body{margin:0;font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:var(--cream)}
+a{color:inherit}
+.hero{background:var(--yellow);position:relative;overflow:hidden;padding:28px 20px 70px}
+.blob{position:absolute;pointer-events:none}
+.wrap{max-width:1000px;margin:0 auto;position:relative}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{width:58px;height:58px;border-radius:16px;background:#fff;object-fit:contain}
+.brand span{font-weight:900;font-size:14px;letter-spacing:.08em;text-transform:uppercase}
+h1{font-size:clamp(38px,7vw,64px);font-weight:900;line-height:1;margin:44px 0 12px;letter-spacing:-.01em}
+h1 b{color:var(--purple)}
+.lead{font-size:clamp(16px,2.4vw,20px);font-weight:600;max-width:560px;line-height:1.45;margin:0}
+.crew{display:flex;margin-top:26px}
+.crew img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:4px solid #fff;box-shadow:0 5px 0 var(--gold)}
+.crew img+img{margin-left:-14px}
+main{max-width:1000px;margin:-40px auto 0;padding:0 20px 60px;position:relative}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.app{background:#fff;border-radius:28px;padding:22px;display:flex;flex-direction:column;gap:14px;text-decoration:none;box-shadow:0 8px 0 #EEF0FA;transition:transform .15s}
+.app:hover{transform:translateY(-4px)}
+.app .top{display:flex;gap:14px;align-items:center}
+.app .top img{width:72px;height:72px;border-radius:20px;flex:none}
+.app h2{font-size:21px;font-weight:900;margin:0;line-height:1.15}
+.tag{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--purple);border-radius:12px;padding:3px 10px;margin-top:4px}
+.app p{margin:0;font-size:15px;font-weight:600;line-height:1.45;color:var(--soft)}
+.app .go{margin-top:auto;min-height:50px;border-radius:25px;background:var(--purple);color:#fff;font-weight:900;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 5px 0 var(--purpleD)}
+.soon{background:transparent;border:4px dashed #E0D3FF;box-shadow:none;justify-content:center;align-items:center;text-align:center;min-height:220px}
+.soon h2{color:var(--purple)}
+footer{text-align:center;font-size:13px;font-weight:600;color:var(--soft);padding:0 20px 40px;line-height:1.6}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="blob" style="top:40px;right:-50px;width:180px;height:180px;border-radius:50%;background:var(--orange);opacity:.5"></div>
+  <div class="blob" style="bottom:-40px;left:30%;width:150px;height:150px;border-radius:40px;background:var(--coral);opacity:.4;transform:rotate(18deg)"></div>
+  <div class="wrap">
+    <a class="brand" href="https://coolkidsuniversity.com"><img src="assets/logo.png" alt=""><span>Cool Kids University</span></a>
+    <h1>Cool Kids <b>Apps</b></h1>
+    <p class="lead">Learn, play, and grow with Chloe, Carter and the Cool Kids. Where stories spark learning.</p>
+    <div class="crew" aria-hidden="true">
+      <img src="talkitout/buddies/chloe.jpg" alt=""><img src="talkitout/buddies/carter.jpg" alt=""><img src="talkitout/buddies/malik.jpg" alt=""><img src="talkitout/buddies/nyla.jpg" alt=""><img src="talkitout/buddies/mia.jpg" alt=""><img src="talkitout/buddies/albert.jpg" alt="">
+    </div>
+  </div>
+</header>
+<main>
+  <div class="grid">
+    <a class="app" href="talkitout/">
+      <div class="top"><img src="assets/talkitout-icon.png" alt=""><div><h2>Talk It Out with the Cool Kids</h2><span class="tag">Feelings and friends</span></div></div>
+      <p>Talk with a Cool Kid about friends, homework, and big feelings, with a calm down corner and a safety help screen built in.</p>
+      <span class="go">Open the app
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+    <div class="app soon"><h2>More apps coming soon</h2><p>New Cool Kids apps are on the way.</p></div>
+  </div>
+</main>
+<footer>© 2026 Cool Kids University, created by CiCi Caver · <a href="https://coolkidsuniversity.com">coolkidsuniversity.com</a></footer>
+</body>
+</html>
