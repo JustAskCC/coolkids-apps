@@ -5,5 +5,6 @@ Learning apps starring the Cool Kids, live at **[apps.coolkidsuniversity.com](ht
 | App | Folder | Live |
 |---|---|---|
 | Talk It Out with the Cool Kids | `talkitout/` | [apps.coolkidsuniversity.com/talkitout](https://apps.coolkidsuniversity.com/talkitout/) |
+| Learn with Bailey | `learnwithbailey/` | [apps.coolkidsuniversity.com/learnwithbailey](https://apps.coolkidsuniversity.com/learnwithbailey/) |
 
 Cool Kids University and its characters are owned by CiCi Caver. See `LICENSE`.
