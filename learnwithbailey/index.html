@@ -6,8 +6,8 @@ const images=["","data:image/webp;base64,UklGRkKrAABXRUJQVlA4WAoAAAAQAAAAGwIA0gI
 'use strict';
 const KEY='cku_bailey_reading_v1';
 const categories=[
- {id:'letters',title:'Letter Sounds',description:'Listen, learn and identify letters.',icon:'🔤',tint:'#e8e6ff',img:1,tag:'Letters & sounds'},
- {id:'phonics',title:'Phonics Fun',description:'Hear sounds and choose the matching beginning letter.',icon:'🔊',tint:'#dcf8f1',img:2,tag:'Listen & learn'},
+ {id:'letters',title:'Letter Sounds',description:'See pictures and identify letters.',icon:'🔤',tint:'#e8e6ff',img:1,tag:'Letters & sounds'},
+ {id:'phonics',title:'Phonics Fun',description:'Look at pictures and find the beginning letter.',icon:'🔊',tint:'#dcf8f1',img:2,tag:'Look & learn'},
  {id:'words',title:'Build a Word',description:'Put sounds together and complete words.',icon:'🧩',tint:'#fff3d2',img:3,tag:'Word building'},
  {id:'sight',title:'Sight Words',description:'Practice words readers see every day.',icon:'👀',tint:'#ffebf4',img:4,tag:'Read the word'},
  {id:'stories',title:'Read with Bailey',description:'Read short stories and answer questions.',icon:'📖',tint:'#e7f0ff',img:6,tag:'Story time'},
@@ -41,67 +41,18 @@ let state;try{state=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){state={}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}};
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
-let kokoroModelPromise=null, activeAudio=null, activeAudioUrl=null, speechRequest=0;
-function voiceStatus(message){const e=document.getElementById('voice-status');if(e){e.textContent=message;e.hidden=!message}}
-async function loadJessica(){
- if(!kokoroModelPromise){
-  kokoroModelPromise=(async()=>{
-   let KokoroTTS;
-   let importError;
-   for(const url of ['https://cdn.jsdelivr.net/npm/kokoro-js@1.2.1/+esm','https://esm.sh/kokoro-js@1.2.1?bundle']){
-    try{const mod=await import(url);if(mod.KokoroTTS){KokoroTTS=mod.KokoroTTS;break}else throw new Error('KokoroTTS export missing')}catch(e){importError=e;console.warn('Voice library source unavailable',url,e)}
-   }
-   if(!KokoroTTS)throw new Error('Voice library download failed: '+(importError?.message||'unknown error'));
-   return KokoroTTS.from_pretrained('onnx-community/Kokoro-82M-v1.0-ONNX',{dtype:'q8',device:'wasm'});
-  })().catch(e=>{kokoroModelPromise=null;throw e});
- }
- return kokoroModelPromise;
-}
-async function narrate(s){
- const request=++speechRequest;
- if(activeAudio){activeAudio.pause();activeAudio=null}
- if(activeAudioUrl){URL.revokeObjectURL(activeAudioUrl);activeAudioUrl=null}
- try{
-  voiceStatus('Loading Jessica’s voice. First use requires downloading a voice model.');
-  const tts=await loadJessica();
-  if(request!==speechRequest)return;
-  voiceStatus('Jessica is preparing your narration…');
-  const output=await tts.generate(String(s),{voice:'af_jessica',speed:Math.max(.55,Math.min(1,Number(state.rate)||.76))});
-  if(request!==speechRequest)return;
-  activeAudioUrl=URL.createObjectURL(output.toBlob());
-  activeAudio=new Audio(activeAudioUrl);
-  activeAudio.onended=()=>{if(request===speechRequest)voiceStatus('')};
-  voiceStatus('');
-  await activeAudio.play();
- }catch(e){
-  console.error('Kokoro Jessica playback unavailable',e);
-  if(request===speechRequest)voiceStatus('Jessica could not start: '+String(e?.message||e).slice(0,220)+'. Try the Listen button again. No computer voice will be used.');
- }
-}
 function refreshHeader(){document.getElementById('topstars').textContent='★ '+state.stars+' stars';document.getElementById('toplessons').textContent=Object.keys(state.completed).length+' lessons completed'}
 function home(){session=null;refreshHeader();const count=Object.keys(state.completed).length;document.getElementById('screen').innerHTML=`<section class="hero"><div class="hero-copy"><div class="eyebrow">Welcome to reading time</div><h1>Learn with<br>Bailey!</h1><p>Discover letters, sound out words, and read a new story. Every little step counts!</p><button class="primary" onclick="start('${nextCat()}')">Let's start reading →</button></div><img src="${images[2]}" alt="Bailey smiling in a blue jersey"></section><div class="section"><h2>Pick your reading adventure</h2><small>6 fun activities</small></div><div class="cards">${categories.map(c=>`<section class="card"><div class="card-icon" style="background:${c.tint}">${c.icon}</div><h3>${c.title}</h3><p>${c.description}</p><button onclick="start('${c.id}')">${state.completed[c.id]?'Practice again':'Play lesson'} →</button><img src="${images[c.img]}" alt="Bailey"></section>`).join('')}</div><div class="section"><h2>My reading journey</h2><small>${count} of 6 lessons</small></div><div class="panel"><div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="6" aria-valuenow="${count}"><div style="width:${100*count/6}%"></div></div><div class="summary" style="margin-top:18px"><div class="stat"><b>${count}/6</b><span>Lessons</span></div><div class="stat"><b>${state.stars}</b><span>Stars earned</span></div><div class="stat"><b>${state.attempts?Math.round(state.correct/state.attempts*100):0}%</b><span>Correct answers</span></div></div></div>`}
 function nextCat(){return categories.find(c=>!state.completed[c.id])?.id||'stories'}
 function start(id){if(!bank[id])return;session={id,i:0,score:0,answered:false,selected:null};renderQuestion();}
 function question(){const b=bank[session.id][session.i];return session.id==='stories'?{prompt:b.q,answer:b.a,choices:b.choices,explain:b.explain,story:b.story}:{prompt:b[0],answer:b[1],choices:b[2],explain:b[3]}}
 function renderQuestion(){refreshHeader();const c=categories.find(c=>c.id===session.id),q=question(),total=bank[session.id].length;
-document.getElementById('screen').innerHTML=`<div class="lesson-header"><button class="back" onclick="home()">← Back to activities</button><span class="pill">${c.icon} ${c.title}</span></div><div class="progress" aria-label="Lesson progress"><div style="width:${100*session.i/total}%"></div></div><div class="activity"><div class="center" style="color:#69768e;font-weight:750;margin:12px">Question ${session.i+1} of ${total}</div><h2>${escapeHtml(q.prompt)}</h2><div class="hint">Take your time. Listen and choose an answer.</div>${q.story?`<div class="story">${escapeHtml(q.story)} <button class="sound" onclick="narrate(question().story)">🔊 Read story</button></div>`:`<div class="question${q.prompt.length>40?' sm':''}">${escapeHtml(session.id==='letters'?'🔤':q.prompt.match(/[:?]\s*(.*)/)?.[1]||c.icon)}</div>`}<div class="center" style="margin:14px"><button class="sound" onclick="speakQuestion()">🔊 Listen to question</button></div><div class="choices">${q.choices.map((v,i)=>`<button class="choice" id="choice${i}" onclick="pick(${i})">${escapeHtml(v)}</button>`).join('')}</div><div class="feedback" id="feedback" role="status" aria-live="polite"></div><div class="lesson-actions"><button class="primary hide" id="nextbtn" onclick="advance()">${session.i===total-1?'Finish lesson':'Next question →'}</button></div></div>`;
+document.getElementById('screen').innerHTML=`<div class="lesson-header"><button class="back" onclick="home()">← Back to activities</button><span class="pill">${c.icon} ${c.title}</span></div><div class="progress" aria-label="Lesson progress"><div style="width:${100*session.i/total}%"></div></div><div class="activity"><div class="center" style="color:#69768e;font-weight:750;margin:12px">Question ${session.i+1} of ${total}</div><h2>${escapeHtml(q.prompt)}</h2><div class="hint">Take your time. Look carefully and choose an answer.</div>${q.story?`<div class="story">${escapeHtml(q.story)}</div>`:`<div class="question${q.prompt.length>40?' sm':''}">${escapeHtml(session.id==='letters'?'🔤':q.prompt.match(/[:?]\s*(.*)/)?.[1]||c.icon)}</div>`}<div class="choices">${q.choices.map((v,i)=>`<button class="choice" id="choice${i}" onclick="pick(${i})">${escapeHtml(v)}</button>`).join('')}</div><div class="feedback" id="feedback" role="status" aria-live="polite"></div><div class="lesson-actions"><button class="primary hide" id="nextbtn" onclick="advance()">${session.i===total-1?'Finish lesson':'Next question →'}</button></div></div>`;
 }
-function speakQuestion(){const q=question();
- if(session?.id==='phonics'&&session.i===5){
-  const a=new Audio('audio/phonics_06_question.mp3');
-  voiceStatus('Playing Chloe’s recorded voice…');
-  a.onended=()=>voiceStatus('');
-  a.onerror=()=>voiceStatus('Chloe’s audio file has not been uploaded yet.');
-  a.play().catch(e=>{console.error('Audio playback failed',e);voiceStatus('Unable to play Chloe’s audio. Check that the recording was uploaded to the audio folder.')});
-  return;
- }
- narrate((q.story?q.story+'. ':'')+q.prompt)
-}
-function pick(i){if(session.answered)return;const q=question(),chosen=q.choices[i],ok=chosen===q.answer;session.answered=true;session.selected=i;state.attempts++;if(ok){state.correct++;state.stars+=2;session.score++}save();q.choices.forEach((v,k)=>{const el=document.getElementById('choice'+k);el.disabled=true;if(v===q.answer)el.classList.add('correct');else if(k===i)el.classList.add('wrong')});const f=document.getElementById('feedback');f.textContent=ok?'Great reading! ★ +2 stars':`Good try! The answer is ${q.answer}.`;f.classList.add(ok?'good':'bad');document.getElementById('nextbtn').classList.remove('hide');narrate((ok?'Wonderful! ':'Nice try. ')+q.explain)}
+function pick(i){if(session.answered)return;const q=question(),chosen=q.choices[i],ok=chosen===q.answer;session.answered=true;session.selected=i;state.attempts++;if(ok){state.correct++;state.stars+=2;session.score++}save();q.choices.forEach((v,k)=>{const el=document.getElementById('choice'+k);el.disabled=true;if(v===q.answer)el.classList.add('correct');else if(k===i)el.classList.add('wrong')});const f=document.getElementById('feedback');f.textContent=ok?'Great reading! ★ +2 stars':`Good try! The answer is ${q.answer}.`;f.classList.add(ok?'good':'bad');document.getElementById('nextbtn').classList.remove('hide')}
 function advance(){if(!session||!session.answered)return;session.i++;session.answered=false;if(session.i>=bank[session.id].length){finish()}else renderQuestion()}
-function finish(){const c=categories.find(c=>c.id===session.id),newly=!state.completed[c.id];state.completed[c.id]=(state.completed[c.id]||0)+1;if(newly)state.stars+=10;save();refreshHeader();document.getElementById('screen').innerHTML=`<div class="panel end center" style="max-width:650px;margin:28px auto"><div class="eyebrow" style="color:var(--purple)">LESSON COMPLETE</div><img src="${images[c.img]}" alt="Bailey is proud of you"><h2>Way to go, reader!</h2><p>You finished <b>${c.title}</b> and got ${session.score} of ${bank[session.id].length} answers correct.</p><div class="badge-box">🏆</div><p><b>★ ${session.score*2+(newly?10:0)} stars earned this lesson</b></p><button class="primary" onclick="home()">Back to my adventures →</button><div style="margin-top:12px"><button class="ghost" onclick="start('${session.id}')">Practice again</button></div></div>`;narrate('You did it! I am so proud of you. Keep reading and keep growing!')}
-function showSettings(){session=null;document.getElementById('screen').innerHTML=`<button class="back" onclick="home()">← Back to activities</button><div class="panel" style="max-width:640px;margin:20px auto"><h2>Grown up settings</h2><p class="smallnote">Reading should feel comfortable, not rushed. Choose a voice speed below.</p><div class="settings-row"><label>Voice speed<small>Slower is usually best for new readers.</small></label><div><input id="speed" type="range" min="0.55" max="1" step="0.05" value="${state.rate}" oninput="setRate(this.value)"><div class="center"><b id="speedval">${state.rate.toFixed(2)}×</b></div></div></div><div class="settings-row"><label>Listen to sample<small>Uses Kokoro Jessica, not the computer voice. The first use requires downloading the model.</small></label><button class="sound" onclick="narrate('Hello! I am Bailey. We can learn to read together, one word at a time.')">🔊 Play</button></div><div class="settings-row"><label>Save a progress backup<small>Download a copy of Bailey's learning records.</small></label><button class="ghost" onclick="exportProgress()">Export</button></div><div class="settings-row"><label>Restore progress<small>Choose a previously exported JSON file.</small></label><input type="file" accept="application/json,.json" aria-label="Restore progress" onchange="importProgress(this)"></div><div class="settings-row"><label>Reset Bailey's progress<small>Clears lessons and stars on this device only.</small></label><button class="ghost" onclick="resetProgress()">Reset</button></div><p class="smallnote">Voice note: Kokoro Jessica (af_jessica) runs in the browser and downloads its model on first use. The download requires internet and may not work on devices with limited memory.</p><p class="smallnote">Privacy: Learning progress is stored locally on this browser. It does not automatically sync between devices or accounts.</p></div>`}
-function setRate(r){state.rate=Number(r);document.getElementById('speedval').textContent=state.rate.toFixed(2)+'×';save()}
+function finish(){const c=categories.find(c=>c.id===session.id),newly=!state.completed[c.id];state.completed[c.id]=(state.completed[c.id]||0)+1;if(newly)state.stars+=10;save();refreshHeader();document.getElementById('screen').innerHTML=`<div class="panel end center" style="max-width:650px;margin:28px auto"><div class="eyebrow" style="color:var(--purple)">LESSON COMPLETE</div><img src="${images[c.img]}" alt="Bailey is proud of you"><h2>Way to go, reader!</h2><p>You finished <b>${c.title}</b> and got ${session.score} of ${bank[session.id].length} answers correct.</p><div class="badge-box">🏆</div><p><b>★ ${session.score*2+(newly?10:0)} stars earned this lesson</b></p><button class="primary" onclick="home()">Back to my adventures →</button><div style="margin-top:12px"><button class="ghost" onclick="start('${session.id}')">Practice again</button></div></div>`}
+function showSettings(){session=null;document.getElementById('screen').innerHTML=`<button class="back" onclick="home()">← Back to activities</button><div class="panel" style="max-width:640px;margin:20px auto"><h2>Grown up settings</h2><p class="smallnote">Bailey's reading lessons use pictures and written questions. You can read the story text aloud yourself.</p><div class="settings-row"><label>Save a progress backup<small>Download a copy of Bailey's learning records.</small></label><button class="ghost" onclick="exportProgress()">Export</button></div><div class="settings-row"><label>Restore progress<small>Choose a previously exported JSON file.</small></label><input type="file" accept="application/json,.json" aria-label="Restore progress" onchange="importProgress(this)"></div><div class="settings-row"><label>Reset Bailey's progress<small>Clears lessons and stars on this device only.</small></label><button class="ghost" onclick="resetProgress()">Reset</button></div><p class="smallnote">Privacy: Learning progress is stored locally on this browser. It does not automatically sync between devices or accounts.</p></div>`}
 function exportProgress(){const blob=new Blob([JSON.stringify({app:'cku_bailey',...state},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='bailey_reading_progress.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),3000)}
 function importProgress(input){const f=input.files[0];if(!f)return;const reader=new FileReader();reader.onload=()=>{try{const v=JSON.parse(reader.result);if(v.app!=='cku_bailey'||!v.completed||typeof v.stars!=='number')throw Error();state={stars:v.stars,completed:v.completed,attempts:v.attempts||0,correct:v.correct||0,rate:v.rate||.76};save();home()}catch(e){alert('This is not a valid Bailey progress backup.')}};reader.readAsText(f)}
 function resetProgress(){if(confirm('Reset Bailey’s reading progress on this device? This cannot be undone unless you exported a backup.')){state={stars:0,completed:{},attempts:0,correct:0,rate:state.rate};save();home()}}
