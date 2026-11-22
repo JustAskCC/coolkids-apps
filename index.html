@@ -30,14 +30,14 @@ main{max-width:1000px;margin:-40px auto 0;padding:0 20px 60px;position:relative}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
 .app{background:#fff;border-radius:28px;padding:22px;display:flex;flex-direction:column;gap:14px;text-decoration:none;box-shadow:0 8px 0 #EEF0FA;transition:transform .15s}
 .app:hover{transform:translateY(-4px)}
+.app:focus-visible{outline:3px solid var(--purpleD);outline-offset:4px}
 .app .top{display:flex;gap:14px;align-items:center}
 .app .top img{width:72px;height:72px;border-radius:20px;flex:none}
 .app h2{font-size:21px;font-weight:900;margin:0;line-height:1.15}
 .tag{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--purple);border-radius:12px;padding:3px 10px;margin-top:4px}
 .app p{margin:0;font-size:15px;font-weight:600;line-height:1.45;color:var(--soft)}
 .app .go{margin-top:auto;min-height:50px;border-radius:25px;background:var(--purple);color:#fff;font-weight:900;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 5px 0 var(--purpleD)}
-.soon{background:transparent;border:4px dashed #E0D3FF;box-shadow:none;justify-content:center;align-items:center;text-align:center;min-height:220px}
-.soon h2{color:var(--purple)}
+.app-icon{width:72px;height:72px;border-radius:20px;flex:none;display:grid;place-items:center;background:#F0E8FF;color:var(--purpleD);font-size:28px;font-weight:900}
 footer{text-align:center;font-size:13px;font-weight:600;color:var(--soft);padding:0 20px 40px;line-height:1.6}
 </style>
 </head>
@@ -48,7 +48,7 @@ footer{text-align:center;font-size:13px;font-weight:600;color:var(--soft);paddin
   <div class="wrap">
     <a class="brand" href="https://coolkidsuniversity.com"><img src="assets/logo.png" alt=""><span>Cool Kids University</span></a>
     <h1>Cool Kids <b>Apps</b></h1>
-    <p class="lead">Learn, play, and grow with Chloe, Carter and the Cool Kids. Where stories spark learning.</p>
+    <p class="lead">Choose an app to practice reading or explore big feelings with the Cool Kids.</p>
     <div class="crew" aria-hidden="true">
       <img src="talkitout/buddies/chloe.jpg" alt=""><img src="talkitout/buddies/carter.jpg" alt=""><img src="talkitout/buddies/malik.jpg" alt=""><img src="talkitout/buddies/nyla.jpg" alt=""><img src="talkitout/buddies/mia.jpg" alt=""><img src="talkitout/buddies/albert.jpg" alt="">
     </div>
@@ -62,7 +62,15 @@ footer{text-align:center;font-size:13px;font-weight:600;color:var(--soft);paddin
       <span class="go">Open the app
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </a>
-    <div class="app soon"><h2>More apps coming soon</h2><p>New Cool Kids apps are on the way.</p></div>
+    <a class="app" href="learnwithbailey/">
+      <div class="top">
+        <span class="app-icon" aria-hidden="true">Aa</span>
+        <div><h2>Learn with Bailey</h2><span class="tag">Reading practice</span></div>
+      </div>
+      <p>Practice letter sounds, build words, and read short stories with Bailey.</p>
+      <span class="go">Open the app
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
   </div>
 </main>
 <footer>© 2026 Cool Kids University, created by CiCi Caver · <a href="https://coolkidsuniversity.com">coolkidsuniversity.com</a></footer>
