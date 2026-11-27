@@ -115,6 +115,7 @@ input.title:focus,textarea:focus{border-color:var(--purple);outline:none}
 input.search{width:100%;border:2px solid var(--line);border-radius:14px;padding:12px 14px;margin:6px 0 4px}
 footer{text-align:center;font-size:13px;font-weight:600;color:var(--soft);padding:10px 20px 40px;line-height:1.6;max-width:720px;margin:0 auto}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:14px;font-weight:800;box-shadow:0 6px 20px rgba(0,0,0,.2);z-index:9}
+.homepill{display:inline-flex;align-items:center;gap:6px;background:#fff;color:#1F2440;border-radius:999px;padding:9px 14px;font:800 14px Montserrat,system-ui,sans-serif;text-decoration:none;box-shadow:0 3px 0 rgba(0,0,0,.14);white-space:nowrap;line-height:1}.homepill:focus-visible{outline:3px solid #5A1FC2;outline-offset:3px}
 /* buddy */
 .buddybar{display:flex;align-items:center;gap:12px;background:#fff;border-radius:22px;padding:12px 14px;box-shadow:0 6px 0 #EEE7DA;margin-bottom:16px}
 .buddybar img{width:58px;height:58px;border-radius:50%;object-fit:cover;border:3px solid var(--bc,#8B3DFF);flex:none}
@@ -167,6 +168,7 @@ footer{text-align:center;font-size:13px;font-weight:600;color:var(--soft);paddin
     <div class="topbar">
       <a class="brand" href="../"><img src="../assets/logo.png" alt=""><span>Cool Kids University</span></a>
       <div class="grow"></div>
+      <a class="homepill" href="../">🏠 All apps</a>
       <button class="pill dark" id="archiveBtn" type="button">📚 My entries</button>
     </div>
     <h1>My <b>Journal</b></h1>
@@ -257,7 +259,7 @@ footer{text-align:center;font-size:13px;font-weight:600;color:var(--soft);paddin
   </section>
 </main>
 
-<div class="picker hidden" id="picker" role="dialog" aria-modal="true" aria-labelledby="pickTitle"><div class="sheet"><h2 id="pickTitle">Pick your writing buddy</h2><p>Your buddy cheers you on and writes with you. When you finish, you get to read what they wrote!</p><div class="bgrid" id="bgrid"></div><div class="row" style="justify-content:flex-end;margin-top:16px"><button class="btn" id="pickClose" type="button">Close</button></div></div></div>
+<div class="picker hidden" id="picker" role="dialog" aria-modal="true" aria-labelledby="pickTitle"><div class="sheet"><h2 id="pickTitle">Pick your writing buddy</h2><p>Your buddy cheers you on and writes with you. When you finish, you get to read what they wrote!</p><div class="bgrid" id="bgrid"></div><div class="row" style="justify-content:space-between;margin-top:16px"><a class="homepill" href="../">🏠 All apps</a><button class="btn" id="pickClose" type="button">Close</button></div></div></div>
 
 <footer>Your writing stays in this browser, not on a Cool Kids University server. Anyone who uses this browser may be able to read it, and clearing browser data can erase it, so download a copy to keep it. If something makes you feel unsafe, talk to a trusted adult.</footer>
 
