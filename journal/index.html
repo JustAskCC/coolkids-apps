@@ -97,6 +97,45 @@ input.title:focus,textarea:focus{border-color:var(--purple);outline:none}
 input.search{width:100%;border:2px solid var(--line);border-radius:14px;padding:12px 14px;margin:6px 0 4px}
 footer{text-align:center;font-size:13px;font-weight:600;color:var(--soft);padding:10px 20px 40px;line-height:1.6;max-width:720px;margin:0 auto}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:14px;font-weight:800;box-shadow:0 6px 20px rgba(0,0,0,.2);z-index:9}
+/* buddy */
+.buddybar{display:flex;align-items:center;gap:12px;background:#fff;border-radius:22px;padding:12px 14px;box-shadow:0 6px 0 #EEE7DA;margin-bottom:16px}
+.buddybar img{width:58px;height:58px;border-radius:50%;object-fit:cover;border:3px solid var(--bc,#8B3DFF);flex:none}
+.buddybar .who{flex:1;min-width:0}
+.buddybar .who b{display:block;font-weight:900;font-size:16px}
+.buddybar .who small{color:var(--soft);font-size:13px}
+.streak{font-weight:900;font-size:14px;background:#FFF1C2;border-radius:999px;padding:7px 12px;white-space:nowrap}
+.bubble-row{display:flex;gap:10px;align-items:flex-end;margin:14px 0 2px}
+.bubble-row img{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:none;border:3px solid var(--bc,#8B3DFF)}
+.bubble{position:relative;background:#F1ECF8;border-radius:18px 18px 18px 4px;padding:10px 14px;font-weight:700;font-size:15px;line-height:1.4}
+.bubble.pop{animation:pop .35s ease}
+@keyframes pop{0%{transform:scale(.85);opacity:.3}100%{transform:scale(1);opacity:1}}
+.typing{display:inline-flex;gap:3px;margin-left:6px;vertical-align:middle}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--soft);animation:blink 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+.reveal{margin-top:20px;border-radius:24px;padding:20px;background:#fff;border:3px solid var(--bc,#8B3DFF);box-shadow:0 6px 0 #EEE7DA}
+.reveal.pop{animation:pop .45s ease}
+.reveal .rh{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.reveal .rh img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:3px solid var(--bc)}
+.reveal .rh b{display:block;font-weight:900;font-size:19px}
+.reveal .rh small{color:var(--soft);font-size:13px}
+.reveal .open{font-style:italic;color:var(--soft);margin:0 0 10px}
+.reveal .txt{white-space:pre-wrap;font-size:17px;line-height:1.75;margin:0}
+.reveal .sign{font-weight:900;margin:12px 0 0}
+.peek{width:100%;margin-top:16px;border-radius:18px;padding:16px;font-weight:900;font-size:17px;background:var(--yellow);box-shadow:0 5px 0 var(--gold)}
+.peek[disabled]{background:#F1ECF8;box-shadow:none;color:var(--soft);cursor:default;font-weight:800;font-size:15px}
+.picker{position:fixed;inset:0;background:rgba(31,36,64,.55);z-index:20;display:grid;place-items:center;padding:14px;overflow:auto}
+.picker .sheet{background:var(--cream);border-radius:28px;padding:22px;max-width:860px;width:100%;max-height:92vh;overflow:auto}
+.picker h2{margin:0 0 4px;font-weight:900;font-size:clamp(24px,4vw,32px)}
+.picker p{margin:0 0 16px;color:var(--soft)}
+.bgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.bcard{background:#fff;border-radius:20px;padding:12px 8px;text-align:center;box-shadow:0 5px 0 #EEE7DA;border:3px solid transparent}
+.bcard[aria-pressed=true]{border-color:var(--ink)}
+.bcard img{width:84px;height:84px;border-radius:50%;object-fit:cover;border:4px solid var(--bc);display:block;margin:0 auto 8px}
+.bcard b{display:block;font-weight:900;font-size:16px}
+.bcard small{display:block;font-size:12px;color:var(--soft);line-height:1.3;margin-top:3px}
+@media(max-width:700px){.bgrid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:450px){.bgrid{grid-template-columns:repeat(2,1fr)}.bcard img{width:70px;height:70px}}
 @media(max-width:700px){.smalls{grid-template-columns:1fr}.choices{grid-template-columns:1fr}.choice img{width:64px;height:64px}}
 @media(max-width:450px){.card{padding:16px;border-radius:22px}.brand span{display:none}textarea{font-size:17px}.days button{font-size:12px}.days button small{display:none}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -119,6 +158,7 @@ footer{text-align:center;font-size:13px;font-weight:600;color:var(--soft);paddin
 
 <main class="wrap">
   <section id="home">
+    <div class="buddybar" id="buddyBar"></div>
     <div class="choices">
       <button class="choice c-chloe" data-mode="chloe" type="button" aria-pressed="false">
         <img src="../talkitout/buddies/chloe.jpg" alt="">
@@ -160,6 +200,7 @@ footer{text-align:center;font-size:13px;font-weight:600;color:var(--soft);paddin
       <label class="lbl" for="title">Give your entry a title <span style="font-weight:600;color:var(--soft)">(optional)</span></label>
       <input class="title" id="title" placeholder="My thoughts today" autocomplete="off" maxlength="80">
 
+      <div class="bubble-row" id="bubbleRow"><img id="bubbleImg" alt=""><div class="bubble" id="bubble" role="status" aria-live="polite"></div></div>
       <label class="lbl" for="body">Your writing</label>
       <textarea id="body" placeholder="Start anywhere. There is no perfect way to write." spellcheck="true"></textarea>
       <div class="meter hidden" id="meter" aria-hidden="true"><i id="meterFill"></i></div>
@@ -175,6 +216,8 @@ footer{text-align:center;font-size:13px;font-weight:600;color:var(--soft);paddin
         <button class="btn" id="new" type="button">📄 New page</button>
         <button class="btn primary" id="save" type="button">Save my entry</button>
       </div>
+      <button class="peek" id="peek" type="button" disabled></button>
+      <div id="reveal"></div>
     </section>
   </section>
 
@@ -188,8 +231,12 @@ footer{text-align:center;font-size:13px;font-weight:600;color:var(--soft);paddin
   </section>
 </main>
 
+<div class="picker hidden" id="picker" role="dialog" aria-modal="true" aria-labelledby="pickTitle"><div class="sheet"><h2 id="pickTitle">Pick your writing buddy</h2><p>Your buddy cheers you on and writes with you. When you finish, you get to read what they wrote!</p><div class="bgrid" id="bgrid"></div><div class="row" style="justify-content:flex-end;margin-top:16px"><button class="btn" id="pickClose" type="button">Close</button></div></div></div>
+
 <footer>Your writing stays in this browser, not on a Cool Kids University server. Anyone who uses this browser may be able to read it, and clearing browser data can erase it, so download a copy to keep it. If something makes you feel unsafe, talk to a trusted adult.</footer>
 
+<script src="buddies.js"></script>
+<script src="answers.js"></script>
 <script>
 "use strict";
 const $ = id => document.getElementById(id);
@@ -275,7 +322,7 @@ const CHALLENGES = {
 const MOODS = [["😄","Happy"],["😌","Calm"],["🤩","Excited"],["🥰","Loved"],["😢","Sad"],["😟","Worried"],["😤","Frustrated"],["😴","Tired"],["🤔","Not sure"]];
 
 /* ---------- state ---------- */
-let state = {entries:[], draft:null, level:1, done:{chloe:[], carter:[]}};
+let state = {entries:[], draft:null, level:1, done:{chloe:[], carter:[]}, buddy:null, streak:{last:null,count:0}};
 let storageOK = true;
 try {
   const saved = localStorage.getItem(KEY);
@@ -287,6 +334,7 @@ try {
 } catch { storageOK = false; }
 state.done = state.done || {};
 for (const k of Object.keys(CHALLENGES)) if (!Array.isArray(state.done[k])) state.done[k] = [];
+if (!state.streak) state.streak = {last:null,count:0};
 
 function today(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
 function dayNum(){const d=new Date();return Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/86400000);}
@@ -304,8 +352,8 @@ function persist(){
 }
 function setPrompt(){
   const m = d.mode;
-  if (m === "daily") { d.prompt = AGE_PROMPTS[+$("level").value][(dayNum()+d.offset)%12]; d.kind = "TODAY'S PROMPT"; d.idx = null; }
-  else if (m === "starter") { d.prompt = STARTERS[(dayNum()+d.offset)%STARTERS.length]+"..."; d.kind = "FINISH THE SENTENCE"; d.idx = null; }
+  if (m === "daily") { d.lvl = +$("level").value; d.pidx = (dayNum()+d.offset)%12; d.prompt = AGE_PROMPTS[d.lvl][d.pidx]; d.kind = "TODAY'S PROMPT"; d.idx = null; }
+  else if (m === "starter") { d.pidx = (dayNum()+d.offset)%STARTERS.length; d.prompt = STARTERS[d.pidx]+"..."; d.kind = "FINISH THE SENTENCE"; d.idx = null; }
   else if (CHALLENGES[m]) { if (d.idx == null) d.idx = nextDay(m); const [k,t] = CHALLENGES[m].prompts[d.idx]; d.prompt = t; d.kind = k; }
   else { d.prompt = ""; d.kind = ""; }
 }
@@ -358,7 +406,7 @@ function render(){
   }
   document.querySelectorAll("#moods button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.m===d.mood)));
   $("title").value = d.title; $("body").value = d.body;
-  renderStats(); persist();
+  renderStats(); renderBuddy(); persist();
 }
 
 function isSaved(){return state.entries.some(e=>e.id===d.id&&e.body===d.body&&e.title===d.title);}
@@ -398,15 +446,16 @@ $("another").onclick = ()=>{
   if (oldStart!==null && (!d.body.trim() || d.body.trim()===oldStart.trim())) d.body = d.prompt.replace(/\.\.\.$/,"")+" ";
   render();
 };
-function update(){ d.title=$("title").value; d.body=$("body").value; renderStats(); $("status").textContent = persist() ? "Draft saved on this device" : $("status").textContent; }
+function update(){ d.title=$("title").value; d.body=$("body").value; renderStats(); cheer(); $("status").textContent = persist() ? "Draft saved on this device" : $("status").textContent; }
 $("title").oninput = $("body").oninput = update;
 
-function toast(msg){const t=document.createElement("div");t.className="toast";t.setAttribute("role","status");t.textContent=msg;document.body.append(t);setTimeout(()=>t.remove(),2400);}
+function toast(msg){document.querySelectorAll(".toast").forEach(x=>x.remove());const t=document.createElement("div");t.className="toast";t.setAttribute("role","status");t.textContent=msg;document.body.append(t);setTimeout(()=>t.remove(),2400);}
 
 function save(){
   if (!d.body.trim() || d.body.trim()===d.prompt.replace(/\.\.\.$/,"").trim()) { $("status").textContent = "Write a little before saving."; return; }
   d.id = d.id || uid();
   state.entries = state.entries.filter(e=>e.id!==d.id);
+  if (buddy()) d.buddy = buddy().id;
   state.entries.unshift({...d, updated:Date.now()});
   const c = CHALLENGES[d.mode]; let msg = "Entry saved! ⭐";
   if (c && !state.done[d.mode].includes(d.idx)) {
@@ -414,7 +463,13 @@ function save(){
     const n = state.done[d.mode].length;
     msg = n===25 ? "You finished all 25 days of "+c.name+"! 🏆" : "Day "+(d.idx+1)+" done! "+n+" of 25 finished 🎉";
   }
-  if (persist()) { $("status").textContent = msg; toast(msg); render(); }
+  const t = today();
+  if (state.streak.last !== t) {
+    const y = new Date(); y.setDate(y.getDate()-1);
+    const ys = y.getFullYear()+"-"+String(y.getMonth()+1).padStart(2,"0")+"-"+String(y.getDate()).padStart(2,"0");
+    state.streak.count = state.streak.last === ys ? state.streak.count+1 : 1; state.streak.last = t;
+  }
+  if (persist()) { $("status").textContent = msg; toast(msg); render(); showReveal(true); }
 }
 $("save").onclick = save;
 $("new").onclick = ()=>{
@@ -463,8 +518,91 @@ $("export").onclick = ()=>{
   setTimeout(()=>URL.revokeObjectURL(url),1000);
 };
 
+/* ---------- writing buddy ---------- */
+function buddy(){ return BUDDIES.find(b=>b.id===state.buddy) || null; }
+function pick(arr, salt){ return arr[(dayNum()+(salt||0)) % arr.length]; }
+function streakCount(){
+  const s = state.streak; if (!s.last) return 0;
+  const y = new Date(); y.setDate(y.getDate()-1);
+  const ys = y.getFullYear()+"-"+String(y.getMonth()+1).padStart(2,"0")+"-"+String(y.getDate()).padStart(2,"0");
+  return (s.last===today() || s.last===ys) ? s.count : 0;
+}
+function goalWords(){ return d.mode==="chloe" ? 150 : d.mode==="carter" ? 60 : d.mode==="free" ? 40 : 35; }
+let lastCheer = "";
+function cheer(force){
+  const b = buddy(); if (!b) return;
+  const w = words(d.body), g = goalWords(), base = d.mode==="starter" ? words(stem()) : 0;
+  const f = Math.max(0, w-base) / g;
+  let key = "start";
+  if (isSaved() && d.body.trim()) key = "done";
+  else if (f >= 1) key = "goal";
+  else if (f >= .85) key = "ending";
+  else if (f >= .5) key = "half";
+  else if (f >= .25) key = "detail";
+  if (key===lastCheer && !force) return;
+  lastCheer = key;
+  const bub = $("bubble");
+  if (key==="done") bub.textContent = "We both finished! I can't wait for you to read mine. 🎉";
+  else if (key==="start" && f===0) bub.innerHTML = esc(b.cheer.start) + ' <span style="color:var(--soft);font-weight:600">I\'m writing mine too</span><span class="typing" aria-hidden="true"><i></i><i></i><i></i></span>';
+  else bub.textContent = b.cheer[key];
+  bub.classList.remove("pop"); void bub.offsetWidth; bub.classList.add("pop");
+}
+function buddyAnswer(e){
+  e = e || d;
+  if (CHALLENGES[e.mode]) return {about:"", text:ANSWERS[e.mode][e.idx]};
+  if (e.mode==="daily" && e.pidx!=null) return {about:"", text:ANSWERS.daily[e.lvl ?? 1][e.pidx]};
+  if (e.mode==="starter" && e.pidx!=null) return {about:"", text:ANSWERS.starters[e.pidx]};
+  const lvl = +$("level").value, i = dayNum()%12;
+  return {about:"You did a free write, so I wrote about today's prompt: \u201c"+AGE_PROMPTS[lvl][i]+"\u201d", text:ANSWERS.daily[lvl][i]};
+}
+function showReveal(animate){
+  const b = BUDDIES.find(x=>x.id===(isSaved() && d.buddy ? d.buddy : state.buddy)) || buddy();
+  const box = $("reveal"); if (!b) { box.innerHTML=""; return; }
+  const a = buddyAnswer(); if (!a.text) { box.innerHTML=""; return; }
+  const salt = (d.idx ?? d.pidx ?? 0);
+  box.dataset.for = d.id || "";
+  box.innerHTML = '<div class="reveal'+(animate?" pop":"")+'" style="--bc:'+b.color+'"><div class="rh"><img src="buddies/'+b.id+'.jpg" alt=""><div><b>'+esc(b.name)+' wrote too!</b><small>'+esc(d.kind ? d.kind.charAt(0)+d.kind.slice(1).toLowerCase() : "Today")+'</small></div></div>'+
+    '<p class="open">'+esc(pick(b.open, salt))+'</p>'+(a.about?'<p class="open">'+esc(a.about)+'</p>':'')+
+    '<p class="txt">'+esc(a.text)+'</p><p class="sign">'+esc(pick(b.close, salt+1))+'</p></div>';
+  $("peek").classList.add("hidden");
+  if (animate) box.scrollIntoView({behavior:"smooth", block:"start"});
+}
+function renderBuddy(){
+  const b = buddy(), bar = $("buddyBar");
+  if (!b) { bar.innerHTML = '<div class="who"><b>Pick a writing buddy</b><small>Write together and read what they wrote when you finish!</small></div><button class="btn primary" type="button" data-pick>Choose</button>'; $("bubbleRow").classList.add("hidden"); $("peek").classList.add("hidden"); $("reveal").innerHTML=""; return; }
+  const n = streakCount();
+  bar.style.setProperty("--bc", b.color);
+  bar.innerHTML = '<img src="buddies/'+b.id+'.jpg" alt=""><div class="who"><b>Writing with '+esc(b.name)+'</b><small>'+esc(b.info)+'</small></div>'+
+    (n ? '<span class="streak" title="Days in a row">🔥 '+n+' day'+(n===1?"":"s")+'</span>' : '')+'<button class="btn" type="button" data-pick>Change</button>';
+  $("bubbleRow").classList.remove("hidden"); $("bubbleRow").style.setProperty("--bc", b.color);
+  $("bubbleImg").src = "buddies/"+b.id+".jpg";
+  const done = isSaved() && d.body.trim();
+  const peek = $("peek"); peek.classList.remove("hidden");
+  if ($("reveal").dataset.for !== (d.id||"")) $("reveal").innerHTML = "";
+  if ($("reveal").innerHTML && done) peek.classList.add("hidden");
+  else { $("reveal").innerHTML = ""; peek.disabled = !done; peek.textContent = done ? "🎉 Read what "+b.name+" wrote!" : "🔒 Save your entry to unlock what "+b.name+" wrote"; }
+  cheer(true);
+}
+$("peek").onclick = ()=>showReveal(true);
+document.addEventListener("click", e=>{ if (e.target.closest("[data-pick]")) openPicker(); });
+function openPicker(){
+  $("bgrid").innerHTML = BUDDIES.map(b=>'<button class="bcard" type="button" data-b="'+b.id+'" aria-pressed="'+(b.id===state.buddy)+'" style="--bc:'+b.color+'"><img src="buddies/'+b.id+'.jpg" alt=""><b>'+esc(b.name)+'</b><small>'+esc(b.info)+'</small></button>').join("");
+  $("pickClose").classList.toggle("hidden", !state.buddy);
+  $("picker").classList.remove("hidden"); document.body.style.overflow = "hidden";
+  setTimeout(()=>$("bgrid").querySelector("button").focus(), 50);
+}
+function closePicker(){ $("picker").classList.add("hidden"); document.body.style.overflow = ""; }
+$("pickClose").onclick = closePicker;
+$("bgrid").addEventListener("click", e=>{
+  const c = e.target.closest("[data-b]"); if (!c) return;
+  state.buddy = c.dataset.b; closePicker(); lastCheer = ""; $("reveal").innerHTML = ""; render();
+  toast(buddy().hello);
+});
+document.addEventListener("keydown", e=>{ if (e.key==="Escape" && state.buddy && !$("picker").classList.contains("hidden")) closePicker(); });
+
 if (d.date!==today() && !d.body.trim() && !d.title) { const m=d.mode; d = fresh(m); }
 render();
+if (!state.buddy) openPicker();
 if (!storageOK) $("status").textContent = "Saving is not working in this browser. Download a copy before you leave.";
 </script>
 </body>
