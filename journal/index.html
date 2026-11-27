@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Journal | Cool Kids University</title>
+<meta name="description" content="A writing journal for kids with daily prompts, sentence starters, and Chloe's and Carter's writing challenges.">
+<meta name="theme-color" content="#8B3DFF">
+<link rel="icon" type="image/png" href="../assets/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#8B3DFF;--purpleD:#5A1FC2;--blue:#1E5BFF;--coral:#FF6B57;--orange:#FF8A1F;--teal:#12B5A6;--green:#22B84B;--yellow:#FFC914;--gold:#E0A800;--ink:#1F2440;--soft:#4A4F6A;--cream:#FFF8EC;--line:#ECE6F7}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:var(--cream);font-weight:600}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+:focus-visible{outline:3px solid var(--purpleD);outline-offset:3px}
+.hidden{display:none!important}
+.wrap{max-width:980px;margin:0 auto;padding:0 18px}
+/* header */
+.hero{background:var(--yellow);position:relative;overflow:hidden;padding:18px 0 54px}
+.blob{position:absolute;pointer-events:none;border-radius:50%}
+.topbar{display:flex;align-items:center;gap:12px;position:relative}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{width:50px;height:50px;border-radius:14px;background:#fff;object-fit:contain}
+.brand span{font-weight:900;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.topbar .grow{flex:1}
+.pill{background:#fff;border-radius:999px;padding:10px 16px;font-weight:800;font-size:14px;box-shadow:0 3px 0 rgba(0,0,0,.12);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.pill.dark{background:var(--ink);color:#fff;box-shadow:0 3px 0 #000}
+h1{font-size:clamp(40px,8vw,72px);font-weight:900;line-height:1;margin:30px 0 8px;letter-spacing:-.02em;position:relative}
+h1 b{color:var(--purple)}
+.lead{font-size:clamp(16px,2.4vw,19px);font-weight:700;margin:0;position:relative}
+main.wrap{margin-top:-30px;position:relative;padding-bottom:40px}
+/* cards */
+.card{background:#fff;border-radius:26px;padding:22px;box-shadow:0 7px 0 #EEE7DA}
+.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.choice{display:flex;gap:14px;align-items:center;text-align:left;padding:18px;border-radius:24px;background:#fff;box-shadow:0 6px 0 var(--sh,#EEE7DA);border:3px solid transparent;transition:transform .15s}
+.choice:hover{transform:translateY(-3px)}
+.choice[aria-pressed=true]{border-color:var(--ink)}
+.choice img{width:76px;height:76px;border-radius:50%;object-fit:cover;flex:none;border:4px solid #fff;box-shadow:0 4px 0 var(--sh)}
+.choice .ic{width:62px;height:62px;border-radius:18px;flex:none;display:grid;place-items:center;font-size:30px;background:var(--bg)}
+.choice strong{display:block;font-size:19px;font-weight:900;line-height:1.15}
+.choice small{display:block;font-size:14px;color:var(--soft);margin-top:4px;line-height:1.35}
+.choice .tag{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:var(--tg);border-radius:10px;padding:3px 9px;margin-bottom:6px;letter-spacing:.04em}
+.c-chloe{--sh:#E3D3FF;--tg:var(--purple);background:#F5EEFF}
+.c-carter{--sh:#CFE0FF;--tg:var(--blue);background:#EDF3FF}
+.smalls{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.c-daily{--bg:#FFE9A8}.c-starter{--bg:#FFD9D3}.c-free{--bg:#CDF3EC}
+/* editor */
+.editor{margin-top:22px}
+.ed-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between}
+.date{font-weight:900;font-size:16px}
+select{border:2px solid var(--line);border-radius:14px;padding:10px 12px;background:#fff;font-weight:700}
+.prompt{border-radius:20px;padding:18px 20px;margin:16px 0 10px;background:#FFF3C4;position:relative}
+.prompt .kind{display:inline-block;font-size:11px;letter-spacing:.08em;font-weight:900;background:var(--ink);color:#fff;border-radius:8px;padding:3px 9px;margin-bottom:8px}
+.prompt .daynum{float:right;font-size:13px;font-weight:800;color:var(--soft)}
+.prompt p{margin:0;font-size:clamp(18px,3vw,22px);font-weight:800;line-height:1.4}
+.prompt.chloe{background:#F1E7FF}.prompt.chloe .kind{background:var(--purple)}
+.prompt.carter{background:#E6EEFF}.prompt.carter .kind{background:var(--blue)}
+.prompt.starter{background:#FFE4DF}.prompt.starter .kind{background:var(--coral)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{border-radius:14px;padding:11px 16px;font-weight:800;background:#F1ECF8}
+.btn.primary{background:var(--purple);color:#fff;box-shadow:0 4px 0 var(--purpleD)}
+.btn.yellow{background:var(--yellow);box-shadow:0 4px 0 var(--gold)}
+.goal{border:2px dashed var(--line);border-radius:16px;padding:12px 14px;margin-top:10px;font-size:14px;color:var(--soft);line-height:1.45}
+.goal b{color:var(--ink)}
+.days{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:12px}
+.days .dhead{font-size:11px;font-weight:900;text-align:center;color:var(--soft);letter-spacing:.06em}
+.days button{border-radius:12px;padding:8px 2px;background:#F6F2FB;font-weight:800;font-size:14px;border:2px solid transparent;line-height:1.1}
+.days button small{display:block;font-size:10px;font-weight:700;color:var(--soft);margin-top:2px}
+.days button.done{background:#D6F5DE;color:#17692E}
+.days button.done small{color:#17692E}
+.days button[aria-current=true]{border-color:var(--ink)}
+label.lbl{display:block;font-weight:800;margin:16px 0 8px}
+.moods{display:flex;gap:8px;flex-wrap:wrap}
+.moods button{border-radius:999px;padding:8px 13px;background:#F6F2FB;font-weight:700;font-size:14px}
+.moods button[aria-pressed=true]{background:var(--ink);color:#fff}
+input.title{width:100%;border:2px solid var(--line);border-radius:14px;padding:13px 14px;font-weight:800;font-size:17px;background:#fff}
+textarea{width:100%;min-height:300px;border:2px solid var(--line);border-radius:18px;padding:16px;font-size:18px;line-height:1.9;font-weight:600;resize:vertical;background:#fff repeating-linear-gradient(transparent 0 33px,#EFE9F7 33px 34px);background-position:0 16px;background-attachment:local}
+input.title:focus,textarea:focus{border-color:var(--purple);outline:none}
+.meter{height:10px;background:#F1ECF8;border-radius:10px;overflow:hidden;margin-top:10px}
+.meter i{display:block;height:100%;width:0;background:var(--teal);border-radius:10px;transition:width .2s}
+.stats{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px;color:var(--soft);margin-top:8px}
+.checks{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.checks label{display:flex;align-items:center;gap:8px;background:#F6F2FB;border-radius:12px;padding:9px 12px;font-size:14px;font-weight:700;cursor:pointer}
+.checks input{width:18px;height:18px;accent-color:var(--green)}
+.actions{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:18px}
+.status{min-height:22px;font-weight:800;color:var(--green);font-size:14px;margin-top:10px}
+/* archive */
+.entry{display:flex;gap:10px;align-items:center;border-top:2px solid var(--line);padding:12px 0}
+.entry .open{flex:1;text-align:left;min-width:0}
+.entry .open b{display:block;font-weight:900;overflow-wrap:anywhere}
+.entry .open small{color:var(--soft);font-size:13px}
+.badge{font-size:11px;font-weight:900;border-radius:8px;padding:2px 7px;color:#fff;margin-right:6px}
+input.search{width:100%;border:2px solid var(--line);border-radius:14px;padding:12px 14px;margin:6px 0 4px}
+footer{text-align:center;font-size:13px;font-weight:600;color:var(--soft);padding:10px 20px 40px;line-height:1.6;max-width:720px;margin:0 auto}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:14px;font-weight:800;box-shadow:0 6px 20px rgba(0,0,0,.2);z-index:9}
+@media(max-width:700px){.smalls{grid-template-columns:1fr}.choices{grid-template-columns:1fr}.choice img{width:64px;height:64px}}
+@media(max-width:450px){.card{padding:16px;border-radius:22px}.brand span{display:none}textarea{font-size:17px}.days button{font-size:12px}.days button small{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="blob" style="top:30px;right:-60px;width:190px;height:190px;background:var(--orange);opacity:.45"></div>
+  <div class="blob" style="bottom:-50px;left:35%;width:140px;height:140px;border-radius:40px;background:var(--coral);opacity:.35;transform:rotate(18deg)"></div>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="../"><img src="../assets/logo.png" alt=""><span>Cool Kids University</span></a>
+      <div class="grow"></div>
+      <button class="pill dark" id="archiveBtn" type="button">📚 My entries</button>
+    </div>
+    <h1>My <b>Journal</b></h1>
+    <p class="lead">My thoughts. My ideas. My story.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="home">
+    <div class="choices">
+      <button class="choice c-chloe" data-mode="chloe" type="button" aria-pressed="false">
+        <img src="../talkitout/buddies/chloe.jpg" alt="">
+        <span><span class="tag">6TH GRADE · 25 PROMPTS</span><strong>Chloe's Writing Challenge</strong><small>Stories, arguments and big questions. 150 to 200 words a day.</small></span>
+      </button>
+      <button class="choice c-carter" data-mode="carter" type="button" aria-pressed="false">
+        <img src="../talkitout/buddies/carter.jpg" alt="">
+        <span><span class="tag">4TH GRADE · 25 PROMPTS</span><strong>Carter's Writing Challenge</strong><small>Fun stories and opinions. One strong paragraph a day.</small></span>
+      </button>
+    </div>
+    <div class="smalls">
+      <button class="choice c-daily" data-mode="daily" type="button" aria-pressed="true"><span class="ic" aria-hidden="true">✨</span><span><strong>Daily Prompt</strong><small>A new idea every day</small></span></button>
+      <button class="choice c-starter" data-mode="starter" type="button" aria-pressed="false"><span class="ic" aria-hidden="true">💬</span><span><strong>Finish the Sentence</strong><small>Start with a few words</small></span></button>
+      <button class="choice c-free" data-mode="free" type="button" aria-pressed="false"><span class="ic" aria-hidden="true">✏️</span><span><strong>Free Write</strong><small>Write whatever is on your mind</small></span></button>
+    </div>
+
+    <section class="card editor" id="editor" aria-label="Write your entry">
+      <div class="ed-head">
+        <span class="date" id="date"></span>
+        <select id="level" aria-label="Writing level">
+          <option value="0">Ages 6 to 8</option>
+          <option value="1">Ages 9 to 12</option>
+          <option value="2">Ages 13 to 17</option>
+        </select>
+      </div>
+
+      <div id="promptArea">
+        <div class="prompt" id="promptBox"><span class="daynum" id="dayNum"></span><span class="kind" id="kind"></span><p id="prompt"></p></div>
+        <div class="row" id="promptBtns"><button class="btn" id="another" type="button">🎲 Try another prompt</button></div>
+        <div id="challengeBox" class="hidden">
+          <div class="goal" id="goal"></div>
+          <div class="days" id="days" aria-label="Choose a challenge day"></div>
+        </div>
+      </div>
+
+      <label class="lbl">How are you feeling? <span style="font-weight:600;color:var(--soft)">(optional)</span></label>
+      <div class="moods" id="moods"></div>
+
+      <label class="lbl" for="title">Give your entry a title <span style="font-weight:600;color:var(--soft)">(optional)</span></label>
+      <input class="title" id="title" placeholder="My thoughts today" autocomplete="off" maxlength="80">
+
+      <label class="lbl" for="body">Your writing</label>
+      <textarea id="body" placeholder="Start anywhere. There is no perfect way to write." spellcheck="true"></textarea>
+      <div class="meter hidden" id="meter" aria-hidden="true"><i id="meterFill"></i></div>
+      <div class="stats"><span id="count">0 words</span><span id="goalNote"></span></div>
+
+      <div id="checkArea" class="hidden">
+        <label class="lbl">Before I finish</label>
+        <div class="checks" id="checks"></div>
+      </div>
+
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+      <div class="actions">
+        <button class="btn" id="new" type="button">📄 New page</button>
+        <button class="btn primary" id="save" type="button">Save my entry</button>
+      </div>
+    </section>
+  </section>
+
+  <section class="card hidden" id="archive" style="margin-top:22px">
+    <div class="ed-head"><h2 style="margin:0;font-weight:900">My past entries</h2><button class="btn" id="back" type="button">← Back to writing</button></div>
+    <div id="progressBox"></div>
+    <label class="lbl" for="search">Find an entry</label>
+    <input class="search" id="search" placeholder="Search your journal" autocomplete="off">
+    <div id="entries"></div>
+    <div class="row" style="margin-top:14px"><button class="btn yellow" id="export" type="button">⬇️ Download all entries</button></div>
+  </section>
+</main>
+
+<footer>Your writing stays in this browser, not on a Cool Kids University server. Anyone who uses this browser may be able to read it, and clearing browser data can erase it, so download a copy to keep it. If something makes you feel unsafe, talk to a trusted adult.</footer>
+
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const KEY = "cku-journal-v2";
+
+const AGE_PROMPTS = [
+ ["What made you smile today?","Invent a new ice cream flavor.","What is your favorite thing to do with someone you love?","If your pet could talk, what would it say?","What is something you learned today?","Describe your dream playground.","What makes you a good friend?","Write about a time you tried something new.","What would you put in a kindness box?","What do you like about yourself?","Invent a silly superhero.","What is your favorite family tradition?"],
+ ["What is something you are proud of that nobody noticed?","If you could design a park for your neighborhood, what would it include?","What does being a good friend mean to you?","Describe a family tradition you would like to keep or start.","If your day had a theme song, what would it sound like?","Write about a time you changed your mind.","What is something you wish adults understood about kids?","Invent a business that helps your community.","What makes you feel most like yourself?","Describe a challenge you handled in your own way.","If you could learn any skill, what would it be and why?","Write a story that begins with a mysterious notebook."],
+ ["What is a value you want to live by?","How has your idea of friendship changed?","What is a goal that belongs entirely to you?","What does success mean outside of grades or money?","Describe a time you advocated for yourself.","What parts of your culture or community inspire you?","What would you change about your school and why?","Write a letter to your future self.","What helps you feel grounded when life gets busy?","What is an opinion you have reconsidered?","Imagine a project that could improve your community.","What does having a healthy boundary look like to you?"]
+];
+
+const STARTERS = ["Something that made me smile today was","I felt proud of myself when","Something hard today was, and I handled it by","If I had a superpower for one day, I would","Three things I am thankful for are","A kind thing I did today was","My favorite part of today was","Tomorrow I want to try","When I feel worried, something that helps me is","If my feelings were weather today, they would be","Someone I want to thank is","When I grow up, I dream of","A new thing I learned today is","My best friend makes me laugh when","If I could go anywhere in the world, I would go to","Something I am really good at is","A time I was brave was","My perfect day would look like"];
+
+const WEEK = ["MON","TUE","WED","THU","FRI"];
+const CHALLENGES = {
+ chloe: {
+  name: "Chloe's Writing Challenge", short: "Chloe", grade: "6th grade",
+  goalHtml: "<b>Daily goal:</b> 150 to 200 words in 2 organized paragraphs. Support your ideas with specific details.",
+  words: [150, 200], paragraphs: 2,
+  checks: ["Clear main idea","Organized paragraphs","Specific examples","Grammar and spelling"],
+  prompts: [
+   ["STORY","A sealed letter arrives from 100 years in the future. What does it say, and what happens next?"],
+   ["ARGUMENT","Should students help make school rules? Give two reasons and consider an objection."],
+   ["REFLECTION","Describe a time you changed your opinion. What changed your mind?"],
+   ["EXPLAIN","How could public places become more welcoming for different ages and abilities?"],
+   ["STORY","Everyone can hear thoughts for one hour. Show one benefit and one problem."],
+   ["ARGUMENT","Is it better to master one talent or be good at many? Defend your choice."],
+   ["STORY","A museum exhibit changes each time you look away. Discover its secret."],
+   ["COMPARE","Compare learning a skill from a person and from a video. Which works when?"],
+   ["PROBLEM SOLVING","Your school gets $5,000. Propose improvements, a budget, and benefits."],
+   ["REFLECTION","What is the difference between popularity and respect? Can someone have both?"],
+   ["STORY","A map shows a street that does not exist. What happens when you find it?"],
+   ["ARGUMENT","Should AI be allowed for homework? Propose a fair rule and defend it."],
+   ["EXPLAIN","How do rumors spread? Describe three ways to check whether claims are true."],
+   ["REFLECTION","Describe a difficult choice someone your age faces. Which values matter?"],
+   ["STORY","Tell a school day from the viewpoint of a backpack, clock, or library book."],
+   ["PERSUADE","Should schools require community service? Address fairness for students."],
+   ["ANALYSIS","Invent a character who makes a bad choice for a good reason. Was it justified?"],
+   ["STORY","The sun fails to rise for three days. How does a city respond?"],
+   ["EXPLAIN","Why do two people remember the same event differently? Give an example."],
+   ["REFLECTION","What does independence mean at age 11 or 12? Name two responsibilities."],
+   ["ARGUMENT","Four day school week or shorter school days? Propose a workable schedule."],
+   ["STORY","Every screen says: \"Solve the puzzle in 24 hours.\" Begin the mystery."],
+   ["ANALYSIS","How do advertisements convince us to want things? Explain two techniques."],
+   ["REFLECTION","What makes someone you admire a leader? What quality would you develop?"],
+   ["OPINION","Invent something that could improve life in 20 years. Who benefits, and what is a drawback?"]
+  ]
+ },
+ carter: {
+  name: "Carter's Writing Challenge", short: "Carter", grade: "4th grade",
+  goalHtml: "<b>Daily goal:</b> at least 1 strong paragraph, 5 to 7 sentences. Give details, examples, and a clear ending. Read your writing aloud and check capitals and punctuation.<br><b>Tip:</b> For stories, include a beginning, middle, and end. For opinions, give reasons and examples.",
+  sentences: [5, 7],
+  checks: ["I explained my idea","I added details","I checked punctuation"],
+  prompts: [
+   ["IMAGINE","If you could invent a new school subject, what would it be and why?"],
+   ["STORY","Write a story about finding a secret door in your school."],
+   ["EXPLAIN","What makes someone a great friend? Give two examples."],
+   ["IMAGINE","If animals could talk for one day, which animal would you interview?"],
+   ["DESCRIBE","Describe a place you would love to visit. What would you do there?"],
+   ["STORY","You wake up with the power to fly. Tell what happens next."],
+   ["OPINION","Should kids help decide school rules? Explain your opinion."],
+   ["INVENT","Invent a gadget that solves an everyday problem. How does it work?"],
+   ["REFLECTION","What is something difficult you learned to do? How did you improve?"],
+   ["STORY","Write a story that begins: \"The package had no name on it...\""],
+   ["IMAGINE","If you could design a dream playground, what would it include?"],
+   ["OPINION","Which is better: exploring the ocean or outer space? Defend your choice."],
+   ["STORY","Tell a story about a robot who misunderstands an important instruction."],
+   ["PROBLEM SOLVING","What is one problem in your community you would like to solve?"],
+   ["DESCRIBE","Describe your perfect Saturday using all five senses."],
+   ["IMAGINE","If you ran a restaurant, what would you serve and why?"],
+   ["STORY","Write a story about a dinosaur showing up at your front door."],
+   ["OPINION","Should students have homework every night? Explain your answer."],
+   ["IMAGINE","Imagine you discover a new planet. Describe its people and places."],
+   ["ADVICE","What advice would you give a younger student starting fourth grade?"],
+   ["STORY","You find a map hidden inside an old book. Where does it lead?"],
+   ["PLAN","What is a skill you want to master? Describe your practice plan."],
+   ["IMAGINE","If you could ask a historical figure three questions, what would they be?"],
+   ["STORY","Write about a day when everything suddenly became tiny."],
+   ["OPINION","What is one change that would make your school better? Explain."]
+  ]
+ }
+};
+const MOODS = [["😄","Happy"],["😌","Calm"],["🤩","Excited"],["🥰","Loved"],["😢","Sad"],["😟","Worried"],["😤","Frustrated"],["😴","Tired"],["🤔","Not sure"]];
+
+/* ---------- state ---------- */
+let state = {entries:[], draft:null, level:1, done:{chloe:[], carter:[]}};
+let storageOK = true;
+try {
+  const saved = localStorage.getItem(KEY);
+  if (saved) state = Object.assign(state, JSON.parse(saved));
+  else {
+    const old = localStorage.getItem("cku.journal.v1");
+    if (old) { const o = JSON.parse(old); state.entries = o.entries || []; state.level = o.level ?? 1; }
+  }
+} catch { storageOK = false; }
+state.done = state.done || {};
+for (const k of Object.keys(CHALLENGES)) if (!Array.isArray(state.done[k])) state.done[k] = [];
+
+function today(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function dayNum(){const d=new Date();return Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/86400000);}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
+function fresh(mode){return {id:null,date:today(),mode:mode||"daily",offset:0,idx:null,prompt:"",kind:"",title:"",body:"",mood:"",checks:[]};}
+function nextDay(k){const done=state.done[k];const i=CHALLENGES[k].prompts.findIndex((_,n)=>!done.includes(n));return i<0?0:i;}
+
+let d = state.draft || fresh();
+if (!d.checks) d.checks = [];
+
+function persist(){
+  state.draft = d; state.level = +$("level").value;
+  try { localStorage.setItem(KEY, JSON.stringify(state)); storageOK = true; return true; }
+  catch { storageOK = false; $("status").textContent = "Saving is not working in this browser. Download a copy before you leave."; return false; }
+}
+function setPrompt(){
+  const m = d.mode;
+  if (m === "daily") { d.prompt = AGE_PROMPTS[+$("level").value][(dayNum()+d.offset)%12]; d.kind = "TODAY'S PROMPT"; d.idx = null; }
+  else if (m === "starter") { d.prompt = STARTERS[(dayNum()+d.offset)%STARTERS.length]+"..."; d.kind = "FINISH THE SENTENCE"; d.idx = null; }
+  else if (CHALLENGES[m]) { if (d.idx == null) d.idx = nextDay(m); const [k,t] = CHALLENGES[m].prompts[d.idx]; d.prompt = t; d.kind = k; }
+  else { d.prompt = ""; d.kind = ""; }
+}
+function words(t){t=t.trim();return t?t.split(/\s+/).length:0;}
+function sentences(t){return (t.match(/[^.!?]*[A-Za-z][^.!?]*[.!?]+/g)||[]).length;}
+function paragraphs(t){return t.split(/\n\s*\n|\n/).filter(p=>words(p)>=8).length;}
+
+function renderStats(){
+  const t = d.body, w = words(t), c = CHALLENGES[d.mode];
+  $("count").textContent = w + (w===1?" word":" words");
+  const meter = $("meter"), fill = $("meterFill"), note = $("goalNote");
+  if (!c) { meter.classList.add("hidden"); note.textContent = ""; return; }
+  meter.classList.remove("hidden");
+  if (c.words) {
+    const [lo,hi] = c.words, p = paragraphs(t);
+    fill.style.width = Math.min(100, w/lo*100) + "%";
+    fill.style.background = w>=lo ? "var(--green)" : "var(--teal)";
+    note.textContent = (w<lo ? (lo-w)+" more words to reach "+lo : w<=hi ? "Goal reached! 🎉" : "Over "+hi+" words, try tightening it up") + " · " + p + (p===1?" paragraph":" paragraphs");
+  } else {
+    const [lo,hi] = c.sentences, s = sentences(t);
+    fill.style.width = Math.min(100, s/lo*100) + "%";
+    fill.style.background = s>=lo ? "var(--green)" : "var(--teal)";
+    note.textContent = s + (s===1?" sentence":" sentences") + " · " + (s<lo ? "goal is "+lo+" to "+hi : s<=hi ? "Goal reached! 🎉" : "Great job going extra!");
+  }
+}
+
+function render(){
+  if (!d.prompt && d.mode !== "free") setPrompt();
+  $("date").textContent = new Date(d.date+"T12:00:00").toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric",year:"numeric"});
+  document.querySelectorAll("[data-mode]").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.mode===d.mode)));
+  const c = CHALLENGES[d.mode];
+  $("level").classList.toggle("hidden", d.mode!=="daily");
+  $("promptArea").classList.toggle("hidden", d.mode==="free");
+  $("promptBox").className = "prompt " + (c ? d.mode : d.mode==="starter" ? "starter" : "");
+  $("kind").textContent = d.kind;
+  $("prompt").textContent = d.prompt;
+  $("promptBtns").classList.toggle("hidden", !!c);
+  $("challengeBox").classList.toggle("hidden", !c);
+  $("checkArea").classList.toggle("hidden", !c);
+  $("dayNum").textContent = c ? "Day "+(d.idx+1)+" of 25" : "";
+  if (c) {
+    $("goal").innerHTML = c.goalHtml;
+    const done = state.done[d.mode];
+    $("days").innerHTML = WEEK.map(w=>'<span class="dhead">'+w+'</span>').join("") +
+      c.prompts.map((p,i)=>'<button type="button" data-day="'+i+'" class="'+(done.includes(i)?"done":"")+'" aria-current="'+(i===d.idx)+'" aria-label="Day '+(i+1)+(done.includes(i)?", finished":"")+'">'+(done.includes(i)?"✓":(i+1))+'<small>'+p[0].split(" ")[0].toLowerCase()+'</small></button>').join("");
+    $("checks").innerHTML = c.checks.map((t,i)=>'<label><input type="checkbox" data-check="'+i+'"'+(d.checks.includes(i)?" checked":"")+'> '+t+'</label>').join("");
+    $("body").placeholder = d.mode==="chloe" ? "Plan first: what is your main idea? Then write 2 paragraphs." : "What is your main idea? What details will help your reader understand?";
+  } else {
+    $("body").placeholder = "Start anywhere. There is no perfect way to write.";
+  }
+  document.querySelectorAll("#moods button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.m===d.mood)));
+  $("title").value = d.title; $("body").value = d.body;
+  renderStats(); persist();
+}
+
+function isSaved(){return state.entries.some(e=>e.id===d.id&&e.body===d.body&&e.title===d.title);}
+function stem(){return (d.prompt||"").replace(/\.\.\.$/,"").trim();}
+function unsafeToLeave(){return d.body.trim() && !isSaved() && d.body.trim()!==stem();}
+
+function chooseMode(m){
+  if (m===d.mode) return;
+  if (unsafeToLeave() && !confirm("Start a new page? Your unsaved writing will be replaced.")) return;
+  d = fresh(m);
+  if (m==="starter") { setPrompt(); d.body = d.prompt.replace(/\.\.\.$/,"")+" "; }
+  $("status").textContent = ""; render();
+  $("editor").scrollIntoView({behavior:"smooth",block:"start"});
+}
+document.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>chooseMode(b.dataset.mode)));
+
+$("days").addEventListener("click", e=>{
+  const b = e.target.closest("[data-day]"); if (!b) return;
+  const i = +b.dataset.day; if (i===d.idx) return;
+  if (d.body.trim() && !isSaved() && !confirm("Switch prompts? Your unsaved writing will be replaced.")) return;
+  const m = d.mode; d = fresh(m); d.idx = i; setPrompt(); $("status").textContent = ""; render();
+});
+$("checks").addEventListener("change", e=>{
+  const i = +e.target.dataset.check;
+  d.checks = e.target.checked ? [...new Set([...d.checks,i])] : d.checks.filter(x=>x!==i); persist();
+});
+for (const [emo,name] of MOODS) {
+  const b = document.createElement("button"); b.type="button"; b.dataset.m = name; b.textContent = emo+" "+name;
+  b.onclick = ()=>{ d.mood = d.mood===name ? "" : name; render(); };
+  $("moods").append(b);
+}
+$("level").value = state.level ?? 1;
+$("level").onchange = ()=>{ d.offset=0; setPrompt(); render(); };
+$("another").onclick = ()=>{
+  d.offset++; const oldStart = d.mode==="starter" ? d.prompt.replace(/\.\.\.$/,"") : null;
+  setPrompt();
+  if (oldStart!==null && (!d.body.trim() || d.body.trim()===oldStart.trim())) d.body = d.prompt.replace(/\.\.\.$/,"")+" ";
+  render();
+};
+function update(){ d.title=$("title").value; d.body=$("body").value; renderStats(); $("status").textContent = persist() ? "Draft saved on this device" : $("status").textContent; }
+$("title").oninput = $("body").oninput = update;
+
+function toast(msg){const t=document.createElement("div");t.className="toast";t.setAttribute("role","status");t.textContent=msg;document.body.append(t);setTimeout(()=>t.remove(),2400);}
+
+function save(){
+  if (!d.body.trim() || d.body.trim()===d.prompt.replace(/\.\.\.$/,"").trim()) { $("status").textContent = "Write a little before saving."; return; }
+  d.id = d.id || uid();
+  state.entries = state.entries.filter(e=>e.id!==d.id);
+  state.entries.unshift({...d, updated:Date.now()});
+  const c = CHALLENGES[d.mode]; let msg = "Entry saved! ⭐";
+  if (c && !state.done[d.mode].includes(d.idx)) {
+    state.done[d.mode].push(d.idx);
+    const n = state.done[d.mode].length;
+    msg = n===25 ? "You finished all 25 days of "+c.name+"! 🏆" : "Day "+(d.idx+1)+" done! "+n+" of 25 finished 🎉";
+  }
+  if (persist()) { $("status").textContent = msg; toast(msg); render(); }
+}
+$("save").onclick = save;
+$("new").onclick = ()=>{
+  if (unsafeToLeave() && !confirm("Start a new page? Your unsaved writing will be replaced.")) return;
+  const m = d.mode; d = fresh(m);
+  if (m==="starter") { setPrompt(); d.body = d.prompt.replace(/\.\.\.$/,"")+" "; }
+  $("status").textContent = ""; render();
+};
+
+/* ---------- archive ---------- */
+const MODE_LABEL = {daily:["Prompt","#E0A800"],starter:["Sentence","#FF6B57"],free:["Free write","#12B5A6"],chloe:["Chloe","#8B3DFF"],carter:["Carter","#1E5BFF"]};
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function showArchive(){ $("home").classList.add("hidden"); $("archive").classList.remove("hidden"); list(); window.scrollTo(0,0); }
+function showHome(){ $("archive").classList.add("hidden"); $("home").classList.remove("hidden"); render(); }
+$("archiveBtn").onclick = showArchive; $("back").onclick = showHome; $("search").oninput = list;
+function list(){
+  $("progressBox").innerHTML = Object.entries(CHALLENGES).map(([k,c])=>{
+    const n = state.done[k].length; return '<div class="goal" style="margin-top:12px"><b>'+esc(c.name)+':</b> '+n+' of 25 days finished'+(n===25?" 🏆":"")+
+      '<div class="meter"><i style="width:'+(n/25*100)+'%;background:'+(k==="chloe"?"var(--purple)":"var(--blue)")+'"></i></div></div>';
+  }).join("");
+  const root = $("entries"); root.replaceChildren();
+  const q = $("search").value.toLowerCase();
+  const items = state.entries.filter(e=>((e.title||"")+" "+e.body+" "+(e.prompt||"")).toLowerCase().includes(q));
+  if (!items.length) { const p=document.createElement("p"); p.style.color="var(--soft)"; p.textContent = state.entries.length ? "No matching entries." : "No saved entries yet. Your saved writing will show up here."; root.append(p); }
+  for (const e of items) {
+    const row = document.createElement("div"); row.className = "entry";
+    const [lbl,col] = MODE_LABEL[e.mode] || MODE_LABEL.daily;
+    const open = document.createElement("button"); open.type="button"; open.className="open";
+    open.innerHTML = '<b>'+esc(e.title || (e.prompt ? e.prompt : "Untitled entry"))+'</b><small><span class="badge" style="background:'+col+'">'+lbl+(CHALLENGES[e.mode]?" day "+(e.idx+1):"")+'</span>'+esc(new Date(e.date+"T12:00:00").toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"}))+' · '+words(e.body)+' words'+(e.mood?' · '+esc(e.mood):'')+'</small>';
+    open.onclick = ()=>{ if (unsafeToLeave() && !confirm("Open this entry and replace your unsaved writing?")) return; d = {...fresh(e.mode), ...e}; showHome(); window.scrollTo(0,$("editor").offsetTop); };
+    const del = document.createElement("button"); del.type="button"; del.className="btn"; del.textContent="Delete";
+    del.onclick = ()=>{ if (confirm("Delete this journal entry?")) { state.entries = state.entries.filter(x=>x.id!==e.id); if (d.id===e.id) d = fresh(d.mode); persist(); list(); } };
+    row.append(open, del); root.append(row);
+  }
+}
+$("export").onclick = ()=>{
+  const all = [...state.entries];
+  if (d.body.trim() && !isSaved()) all.unshift({...d, title:(d.title||"Untitled")+" (draft)"});
+  if (!all.length) { toast("Nothing to download yet"); return; }
+  const text = all.map(e=>{
+    const c = CHALLENGES[e.mode];
+    return e.date+" | "+(e.title||"Untitled")+"\n"+(c?c.name+", Day "+(e.idx+1)+"\n":"")+(e.mood?"Feeling: "+e.mood+"\n":"")+(e.prompt?"Prompt: "+e.prompt+"\n":"")+"\n"+e.body;
+  }).join("\n\n====================\n\n");
+  const url = URL.createObjectURL(new Blob([text],{type:"text/plain"}));
+  const a = document.createElement("a"); a.href=url; a.download="my-journal.txt"; document.body.append(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
+
+if (d.date!==today() && !d.body.trim() && !d.title) { const m=d.mode; d = fresh(m); }
+render();
+if (!storageOK) $("status").textContent = "Saving is not working in this browser. Download a copy before you leave.";
+</script>
+</body>
+</html>
