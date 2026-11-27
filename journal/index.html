@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>My Journal | Cool Kids University</title>
-<meta name="description" content="A writing journal for kids with daily prompts, sentence starters, and Chloe's and Carter's writing challenges.">
+<meta name="description" content="A writing journal for kids with a Cool Kids writing buddy, daily prompts, sentence starters and 25 day writing challenges.">
 <meta name="theme-color" content="#8B3DFF">
 <link rel="icon" type="image/png" href="../assets/favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,6 +38,10 @@ main.wrap{margin-top:-30px;position:relative;padding-bottom:40px}
 .choices{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .choice{display:flex;gap:14px;align-items:center;text-align:left;padding:18px;border-radius:24px;background:#fff;box-shadow:0 6px 0 var(--sh,#EEE7DA);border:3px solid transparent;transition:transform .15s}
 .choice:hover{transform:translateY(-3px)}
+h2.sec{font-size:18px;font-weight:900;margin:22px 4px 10px}
+main.wrap>section>h2.sec:first-child{margin-top:0;color:var(--ink)}
+.choice{position:relative}
+.choice[aria-pressed=true]::after{content:"✓ Picked";position:absolute;top:10px;right:12px;background:var(--ink);color:#fff;font-size:11px;font-weight:900;border-radius:999px;padding:3px 9px}
 .choice[aria-pressed=true]{border-color:var(--ink)}
 .choice img{width:76px;height:76px;border-radius:50%;object-fit:cover;flex:none;border:4px solid #fff;box-shadow:0 4px 0 var(--sh)}
 .choice .ic{width:62px;height:62px;border-radius:18px;flex:none;display:grid;place-items:center;font-size:30px;background:var(--bg)}
@@ -158,15 +162,17 @@ footer{text-align:center;font-size:13px;font-weight:600;color:var(--soft);paddin
 
 <main class="wrap">
   <section id="home">
+    <h2 class="sec">Your writing buddy</h2>
     <div class="buddybar" id="buddyBar"></div>
+    <h2 class="sec">What do you want to write today?</h2>
     <div class="choices">
       <button class="choice c-chloe" data-mode="chloe" type="button" aria-pressed="false">
-        <img src="../talkitout/buddies/chloe.jpg" alt="">
-        <span><span class="tag">6TH GRADE · 25 PROMPTS</span><strong>Chloe's Writing Challenge</strong><small>Stories, arguments and big questions. 150 to 200 words a day.</small></span>
+        <span class="ic" aria-hidden="true" style="background:#E3D3FF">🏆</span>
+        <span><span class="tag">25 DAY CHALLENGE</span><strong>6th Grade Writing Challenge</strong><small>Stories, arguments and big questions. 150 to 200 words a day.</small></span>
       </button>
       <button class="choice c-carter" data-mode="carter" type="button" aria-pressed="false">
-        <img src="../talkitout/buddies/carter.jpg" alt="">
-        <span><span class="tag">4TH GRADE · 25 PROMPTS</span><strong>Carter's Writing Challenge</strong><small>Fun stories and opinions. One strong paragraph a day.</small></span>
+        <span class="ic" aria-hidden="true" style="background:#CFE0FF">🚀</span>
+        <span><span class="tag">25 DAY CHALLENGE</span><strong>4th Grade Writing Challenge</strong><small>Fun stories and opinions. One strong paragraph a day.</small></span>
       </button>
     </div>
     <div class="smalls">
@@ -253,7 +259,7 @@ const STARTERS = ["Something that made me smile today was","I felt proud of myse
 const WEEK = ["MON","TUE","WED","THU","FRI"];
 const CHALLENGES = {
  chloe: {
-  name: "Chloe's Writing Challenge", short: "Chloe", grade: "6th grade",
+  name: "6th Grade Writing Challenge", short: "6th Grade", grade: "6th grade",
   goalHtml: "<b>Daily goal:</b> 150 to 200 words in 2 organized paragraphs. Support your ideas with specific details.",
   words: [150, 200], paragraphs: 2,
   checks: ["Clear main idea","Organized paragraphs","Specific examples","Grammar and spelling"],
@@ -286,7 +292,7 @@ const CHALLENGES = {
   ]
  },
  carter: {
-  name: "Carter's Writing Challenge", short: "Carter", grade: "4th grade",
+  name: "4th Grade Writing Challenge", short: "4th Grade", grade: "4th grade",
   goalHtml: "<b>Daily goal:</b> at least 1 strong paragraph, 5 to 7 sentences. Give details, examples, and a clear ending. Read your writing aloud and check capitals and punctuation.<br><b>Tip:</b> For stories, include a beginning, middle, and end. For opinions, give reasons and examples.",
   sentences: [5, 7],
   checks: ["I explained my idea","I added details","I checked punctuation"],
@@ -480,7 +486,7 @@ $("new").onclick = ()=>{
 };
 
 /* ---------- archive ---------- */
-const MODE_LABEL = {daily:["Prompt","#E0A800"],starter:["Sentence","#FF6B57"],free:["Free write","#12B5A6"],chloe:["Chloe","#8B3DFF"],carter:["Carter","#1E5BFF"]};
+const MODE_LABEL = {daily:["Prompt","#E0A800"],starter:["Sentence","#FF6B57"],free:["Free write","#12B5A6"],chloe:["6th grade","#8B3DFF"],carter:["4th grade","#1E5BFF"]};
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function showArchive(){ $("home").classList.add("hidden"); $("archive").classList.remove("hidden"); list(); window.scrollTo(0,0); }
 function showHome(){ $("archive").classList.add("hidden"); $("home").classList.remove("hidden"); render(); }
