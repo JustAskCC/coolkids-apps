@@ -38,6 +38,20 @@ main.wrap{margin-top:-30px;position:relative;padding-bottom:40px}
 .choices{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .choice{display:flex;gap:14px;align-items:center;text-align:left;padding:18px;border-radius:24px;background:#fff;box-shadow:0 6px 0 var(--sh,#EEE7DA);border:3px solid transparent;transition:transform .15s}
 .choice:hover{transform:translateY(-3px)}
+.choices.one{grid-template-columns:1fr}.smalls.two{grid-template-columns:repeat(2,1fr)}
+.c-cal{--sh:#FFD9B0;--tg:var(--orange);background:#FFF2E2}
+.prompt.cal{background:#FFF2E2}.prompt.cal .kind{background:var(--orange)}
+.calhead{display:flex;align-items:center;justify-content:space-between;margin:14px 0 8px}
+.calhead b{font-weight:900;font-size:17px}
+.calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.calgrid .dh{font-size:11px;font-weight:900;text-align:center;color:var(--soft)}
+.calgrid button{aspect-ratio:1;border-radius:12px;background:#F6F2FB;font-weight:800;font-size:15px;border:2px solid transparent;display:grid;place-items:center;line-height:1}
+.calgrid button.done{background:#D6F5DE;color:#17692E}
+.calgrid button.today{border-color:var(--orange)}
+.calgrid button[aria-current=true]{background:var(--ink);color:#fff}
+.calgrid button:disabled{opacity:.35;cursor:default}
+.gradelbl{display:flex;align-items:center;gap:8px;font-weight:800;font-size:14px}
+.calnote{font-size:13px;color:var(--soft);margin:8px 2px 0}
 h2.sec{font-size:18px;font-weight:900;margin:22px 4px 10px}
 main.wrap>section>h2.sec:first-child{margin-top:0;color:var(--ink)}
 .choice{position:relative}
@@ -140,7 +154,7 @@ footer{text-align:center;font-size:13px;font-weight:600;color:var(--soft);paddin
 .bcard small{display:block;font-size:12px;color:var(--soft);line-height:1.3;margin-top:3px}
 @media(max-width:700px){.bgrid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:450px){.bgrid{grid-template-columns:repeat(2,1fr)}.bcard img{width:70px;height:70px}}
-@media(max-width:700px){.smalls{grid-template-columns:1fr}.choices{grid-template-columns:1fr}.choice img{width:64px;height:64px}}
+@media(max-width:700px){.smalls:not(.two){grid-template-columns:1fr}.choices{grid-template-columns:1fr}.choice img{width:64px;height:64px}}
 @media(max-width:450px){.card{padding:16px;border-radius:22px}.brand span{display:none}textarea{font-size:17px}.days button{font-size:12px}.days button small{display:none}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -165,18 +179,13 @@ footer{text-align:center;font-size:13px;font-weight:600;color:var(--soft);paddin
     <h2 class="sec">Your writing buddy</h2>
     <div class="buddybar" id="buddyBar"></div>
     <h2 class="sec">What do you want to write today?</h2>
-    <div class="choices">
-      <button class="choice c-chloe" data-mode="chloe" type="button" aria-pressed="false">
-        <span class="ic" aria-hidden="true" style="background:#E3D3FF">🏆</span>
-        <span><span class="tag">25 DAY CHALLENGE</span><strong>6th Grade Writing Challenge</strong><small>Stories, arguments and big questions. 150 to 200 words a day.</small></span>
-      </button>
-      <button class="choice c-carter" data-mode="carter" type="button" aria-pressed="false">
-        <span class="ic" aria-hidden="true" style="background:#CFE0FF">🚀</span>
-        <span><span class="tag">25 DAY CHALLENGE</span><strong>4th Grade Writing Challenge</strong><small>Fun stories and opinions. One strong paragraph a day.</small></span>
+    <div class="choices one">
+      <button class="choice c-cal" data-mode="cal" type="button" aria-pressed="true">
+        <span class="ic" aria-hidden="true" style="background:#FFE2C2">📅</span>
+        <span><span class="tag">NEW PROMPT EVERY DAY</span><strong>Daily Writing Calendar</strong><small>A different prompt for every day of the year. Your goal matches your grade.</small></span>
       </button>
     </div>
-    <div class="smalls">
-      <button class="choice c-daily" data-mode="daily" type="button" aria-pressed="true"><span class="ic" aria-hidden="true">✨</span><span><strong>Daily Prompt</strong><small>A new idea every day</small></span></button>
+    <div class="smalls two">
       <button class="choice c-starter" data-mode="starter" type="button" aria-pressed="false"><span class="ic" aria-hidden="true">💬</span><span><strong>Finish the Sentence</strong><small>Start with a few words</small></span></button>
       <button class="choice c-free" data-mode="free" type="button" aria-pressed="false"><span class="ic" aria-hidden="true">✏️</span><span><strong>Free Write</strong><small>Write whatever is on your mind</small></span></button>
     </div>
@@ -184,16 +193,27 @@ footer{text-align:center;font-size:13px;font-weight:600;color:var(--soft);paddin
     <section class="card editor" id="editor" aria-label="Write your entry">
       <div class="ed-head">
         <span class="date" id="date"></span>
-        <select id="level" aria-label="Writing level">
-          <option value="0">Ages 6 to 8</option>
-          <option value="1">Ages 9 to 12</option>
-          <option value="2">Ages 13 to 17</option>
-        </select>
+        <label class="gradelbl" id="gradeLbl">My grade
+        <select id="grade">
+          <option value="0">Grades K to 2</option>
+          <option value="1">Grades 3 and 4</option>
+          <option value="2">Grades 5 and 6</option>
+          <option value="3">Grades 7 and up</option>
+        </select></label>
       </div>
 
       <div id="promptArea">
         <div class="prompt" id="promptBox"><span class="daynum" id="dayNum"></span><span class="kind" id="kind"></span><p id="prompt"></p></div>
         <div class="row" id="promptBtns"><button class="btn" id="another" type="button">🎲 Try another prompt</button></div>
+        <div id="calBox" class="hidden">
+          <div class="goal" id="calGoal"></div>
+          <div class="row" style="margin-top:10px"><button class="btn" id="calToggle" type="button">📅 Pick a different day</button><button class="btn hidden" id="calToday" type="button">↩ Back to today</button></div>
+          <div id="calWrap" class="hidden">
+            <div class="calhead"><button class="btn" id="calPrev" type="button" aria-label="Previous month">‹</button><b id="calTitle"></b><button class="btn" id="calNext" type="button" aria-label="Next month">›</button></div>
+            <div class="calgrid" id="calGrid"></div>
+            <p class="calnote">✓ means you wrote that day. You can catch up on any day up to today.</p>
+          </div>
+        </div>
         <div id="challengeBox" class="hidden">
           <div class="goal" id="goal"></div>
           <div class="days" id="days" aria-label="Choose a challenge day"></div>
@@ -243,6 +263,7 @@ footer{text-align:center;font-size:13px;font-weight:600;color:var(--soft);paddin
 
 <script src="buddies.js"></script>
 <script src="answers.js"></script>
+<script src="calendar.js"></script>
 <script>
 "use strict";
 const $ = id => document.getElementById(id);
@@ -328,7 +349,7 @@ const CHALLENGES = {
 const MOODS = [["😄","Happy"],["😌","Calm"],["🤩","Excited"],["🥰","Loved"],["😢","Sad"],["😟","Worried"],["😤","Frustrated"],["😴","Tired"],["🤔","Not sure"]];
 
 /* ---------- state ---------- */
-let state = {entries:[], draft:null, level:1, done:{chloe:[], carter:[]}, buddy:null, streak:{last:null,count:0}};
+let state = {entries:[], draft:null, level:1, grade:1, calDone:{}, done:{chloe:[], carter:[]}, buddy:null, streak:{last:null,count:0}};
 let storageOK = true;
 try {
   const saved = localStorage.getItem(KEY);
@@ -341,24 +362,27 @@ try {
 state.done = state.done || {};
 for (const k of Object.keys(CHALLENGES)) if (!Array.isArray(state.done[k])) state.done[k] = [];
 if (!state.streak) state.streak = {last:null,count:0};
+if (!state.calDone) state.calDone = {};
+if (state.grade == null) state.grade = 1;
 
 function today(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
 function dayNum(){const d=new Date();return Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/86400000);}
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
-function fresh(mode){return {id:null,date:today(),mode:mode||"daily",offset:0,idx:null,prompt:"",kind:"",title:"",body:"",mood:"",checks:[]};}
+function fresh(mode){return {id:null,date:today(),mode:mode||"cal",offset:0,idx:null,prompt:"",kind:"",title:"",body:"",mood:"",checks:[]};}
 function nextDay(k){const done=state.done[k];const i=CHALLENGES[k].prompts.findIndex((_,n)=>!done.includes(n));return i<0?0:i;}
 
 let d = state.draft || fresh();
 if (!d.checks) d.checks = [];
 
 function persist(){
-  state.draft = d; state.level = +$("level").value;
+  state.draft = d; state.grade = +$("grade").value;
   try { localStorage.setItem(KEY, JSON.stringify(state)); storageOK = true; return true; }
   catch { storageOK = false; $("status").textContent = "Saving is not working in this browser. Download a copy before you leave."; return false; }
 }
 function setPrompt(){
   const m = d.mode;
-  if (m === "daily") { d.lvl = +$("level").value; d.pidx = (dayNum()+d.offset)%12; d.prompt = AGE_PROMPTS[d.lvl][d.pidx]; d.kind = "TODAY'S PROMPT"; d.idx = null; }
+  if (m === "cal") { const [y,mo,da] = d.date.split("-").map(Number); const e = (CALENDAR[mo]||[])[da-1] || CALENDAR[mo][CALENDAR[mo].length-1]; d.kind = e[0]; d.prompt = e[1]; d.ref = e[2] || null; d.idx = null; }
+  else if (m === "daily") { d.lvl = state.level ?? 1; d.pidx = (dayNum()+d.offset)%12; d.prompt = AGE_PROMPTS[d.lvl][d.pidx]; d.kind = "TODAY'S PROMPT"; d.idx = null; }
   else if (m === "starter") { d.pidx = (dayNum()+d.offset)%STARTERS.length; d.prompt = STARTERS[d.pidx]+"..."; d.kind = "FINISH THE SENTENCE"; d.idx = null; }
   else if (CHALLENGES[m]) { if (d.idx == null) d.idx = nextDay(m); const [k,t] = CHALLENGES[m].prompts[d.idx]; d.prompt = t; d.kind = k; }
   else { d.prompt = ""; d.kind = ""; }
@@ -368,7 +392,7 @@ function sentences(t){return (t.match(/[^.!?]*[A-Za-z][^.!?]*[.!?]+/g)||[]).leng
 function paragraphs(t){return t.split(/\n\s*\n|\n/).filter(p=>words(p)>=8).length;}
 
 function renderStats(){
-  const t = d.body, w = words(t), c = CHALLENGES[d.mode];
+  const t = d.body, w = words(t), c = cfg();
   $("count").textContent = w + (w===1?" word":" words");
   const meter = $("meter"), fill = $("meterFill"), note = $("goalNote");
   if (!c) { meter.classList.add("hidden"); note.textContent = ""; return; }
@@ -390,23 +414,27 @@ function render(){
   if (!d.prompt && d.mode !== "free") setPrompt();
   $("date").textContent = new Date(d.date+"T12:00:00").toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric",year:"numeric"});
   document.querySelectorAll("[data-mode]").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.mode===d.mode)));
-  const c = CHALLENGES[d.mode];
-  $("level").classList.toggle("hidden", d.mode!=="daily");
+  const ch = CHALLENGES[d.mode], cal = d.mode==="cal", c = cfg();
+  $("gradeLbl").classList.toggle("hidden", !cal);
   $("promptArea").classList.toggle("hidden", d.mode==="free");
-  $("promptBox").className = "prompt " + (c ? d.mode : d.mode==="starter" ? "starter" : "");
+  $("promptBox").className = "prompt " + (ch ? d.mode : cal ? "cal" : d.mode==="starter" ? "starter" : "");
   $("kind").textContent = d.kind;
   $("prompt").textContent = d.prompt;
-  $("promptBtns").classList.toggle("hidden", !!c);
-  $("challengeBox").classList.toggle("hidden", !c);
+  $("promptBtns").classList.toggle("hidden", !!c || d.mode==="daily" && false);
+  $("challengeBox").classList.toggle("hidden", !ch);
+  $("calBox").classList.toggle("hidden", !cal);
   $("checkArea").classList.toggle("hidden", !c);
-  $("dayNum").textContent = c ? "Day "+(d.idx+1)+" of 25" : "";
+  $("dayNum").textContent = ch ? "Day "+(d.idx+1)+" of 25" : cal && d.date!==today() ? "Catch up day" : "";
+  if (cal) { $("calGoal").innerHTML = c.goalHtml; $("calToday").classList.toggle("hidden", d.date===today()); renderCal(); }
   if (c) {
+    if (ch) {
     $("goal").innerHTML = c.goalHtml;
     const done = state.done[d.mode];
     $("days").innerHTML = WEEK.map(w=>'<span class="dhead">'+w+'</span>').join("") +
       c.prompts.map((p,i)=>'<button type="button" data-day="'+i+'" class="'+(done.includes(i)?"done":"")+'" aria-current="'+(i===d.idx)+'" aria-label="Day '+(i+1)+(done.includes(i)?", finished":"")+'">'+(done.includes(i)?"✓":(i+1))+'<small>'+p[0].split(" ")[0].toLowerCase()+'</small></button>').join("");
+    }
     $("checks").innerHTML = c.checks.map((t,i)=>'<label><input type="checkbox" data-check="'+i+'"'+(d.checks.includes(i)?" checked":"")+'> '+t+'</label>').join("");
-    $("body").placeholder = d.mode==="chloe" ? "Plan first: what is your main idea? Then write 2 paragraphs." : "What is your main idea? What details will help your reader understand?";
+    $("body").placeholder = (c.paragraphs||0) > 1 ? "Plan first: what is your main idea? Then write 2 paragraphs." : "What is your main idea? What details will help your reader understand?";
   } else {
     $("body").placeholder = "Start anywhere. There is no perfect way to write.";
   }
@@ -444,8 +472,8 @@ for (const [emo,name] of MOODS) {
   b.onclick = ()=>{ d.mood = d.mood===name ? "" : name; render(); };
   $("moods").append(b);
 }
-$("level").value = state.level ?? 1;
-$("level").onchange = ()=>{ d.offset=0; setPrompt(); render(); };
+$("grade").value = state.grade ?? 1;
+$("grade").onchange = ()=>{ state.grade = +$("grade").value; d.checks = []; lastCheer = ""; render(); };
 $("another").onclick = ()=>{
   d.offset++; const oldStart = d.mode==="starter" ? d.prompt.replace(/\.\.\.$/,"") : null;
   setPrompt();
@@ -464,6 +492,7 @@ function save(){
   if (buddy()) d.buddy = buddy().id;
   state.entries.unshift({...d, updated:Date.now()});
   const c = CHALLENGES[d.mode]; let msg = "Entry saved! ⭐";
+  if (d.mode==="cal" && !state.calDone[d.date]) { state.calDone[d.date] = 1; const n = Object.keys(state.calDone).length; msg = "Day saved! You've written on "+n+" day"+(n===1?"":"s")+" 🎉"; }
   if (c && !state.done[d.mode].includes(d.idx)) {
     state.done[d.mode].push(d.idx);
     const n = state.done[d.mode].length;
@@ -486,7 +515,7 @@ $("new").onclick = ()=>{
 };
 
 /* ---------- archive ---------- */
-const MODE_LABEL = {daily:["Prompt","#E0A800"],starter:["Sentence","#FF6B57"],free:["Free write","#12B5A6"],chloe:["6th grade","#8B3DFF"],carter:["4th grade","#1E5BFF"]};
+const MODE_LABEL = {cal:["Calendar","#FF8A1F"],daily:["Prompt","#E0A800"],starter:["Sentence","#FF6B57"],free:["Free write","#12B5A6"],chloe:["6th grade","#8B3DFF"],carter:["4th grade","#1E5BFF"]};
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function showArchive(){ $("home").classList.add("hidden"); $("archive").classList.remove("hidden"); list(); window.scrollTo(0,0); }
 function showHome(){ $("archive").classList.add("hidden"); $("home").classList.remove("hidden"); render(); }
@@ -524,6 +553,44 @@ $("export").onclick = ()=>{
   setTimeout(()=>URL.revokeObjectURL(url),1000);
 };
 
+/* ---------- daily calendar ---------- */
+const GOALS = [
+ {name:"Grades K to 2", goalHtml:"<b>Today's goal:</b> 2 to 4 sentences. Start each sentence with a capital letter and end it with a period.", sentences:[2,4], checks:["I used capital letters","I used periods","I read it out loud"]},
+ {name:"Grades 3 and 4", goalHtml:"<b>Today's goal:</b> 1 strong paragraph, 5 to 7 sentences. Give details, examples and a clear ending.<br><b>Tip:</b> For stories, include a beginning, middle and end. For opinions, give reasons and examples.", sentences:[5,7], checks:["I explained my idea","I added details","I checked punctuation"]},
+ {name:"Grades 5 and 6", goalHtml:"<b>Today's goal:</b> 150 to 200 words in 2 organized paragraphs. Support your ideas with specific details.", words:[150,200], paragraphs:2, checks:["Clear main idea","Organized paragraphs","Specific examples","Grammar and spelling"]},
+ {name:"Grades 7 and up", goalHtml:"<b>Today's goal:</b> 250 to 350 words in 3 paragraphs. Open strong, back up your ideas and finish with a clear conclusion.", words:[250,350], paragraphs:3, checks:["Strong opening","Clear main idea","Evidence or examples","Strong conclusion","Grammar and spelling"]}
+];
+function cfg(){ if (CHALLENGES[d.mode]) return CHALLENGES[d.mode]; if (d.mode==="cal") return GOALS[state.grade ?? 1]; return null; }
+function refText(ref){ if (!ref) return ""; const p = ref.split(":"); if (p[0]==="daily") return (ANSWERS.daily[+p[1]]||[])[+p[2]] || ""; return (ANSWERS[p[0]]||[])[+p[1]] || ""; }
+function ymd(dt){ return dt.getFullYear()+"-"+String(dt.getMonth()+1).padStart(2,"0")+"-"+String(dt.getDate()).padStart(2,"0"); }
+let calView = null;
+function renderCal(){
+  if (!calView) { const [y,m] = d.date.split("-").map(Number); calView = {y, m}; }
+  const {y, m} = calView, first = new Date(y, m-1, 1), days = new Date(y, m, 0).getDate(), t = today();
+  $("calTitle").textContent = first.toLocaleDateString(undefined,{month:"long",year:"numeric"});
+  const now = new Date(); $("calNext").disabled = (y > now.getFullYear()) || (y===now.getFullYear() && m >= now.getMonth()+1);
+  let h = ["S","M","T","W","T","F","S"].map(x=>'<span class="dh">'+x+'</span>').join("");
+  for (let i=0;i<first.getDay();i++) h += '<span></span>';
+  for (let dd=1; dd<=days; dd++) {
+    const ds = ymd(new Date(y, m-1, dd)), done = !!state.calDone[ds];
+    h += '<button type="button" data-date="'+ds+'" class="'+(done?"done ":"")+(ds===t?"today":"")+'" aria-current="'+(ds===d.date)+'"'+(ds>t?" disabled":"")+' aria-label="'+ds+(done?", written":"")+'">'+(done?"✓":dd)+'</button>';
+  }
+  $("calGrid").innerHTML = h;
+}
+function goDate(ds){
+  if (ds===d.date && d.mode==="cal") return;
+  if (unsafeToLeave() && !confirm("Switch days? Your unsaved writing will be replaced.")) return;
+  const saved = state.entries.find(e=>e.mode==="cal" && e.date===ds);
+  d = saved ? {...fresh("cal"), ...saved} : {...fresh("cal"), date:ds};
+  if (!saved) setPrompt();
+  lastCheer = ""; $("status").textContent = ""; render();
+}
+$("calToggle").onclick = ()=>{ $("calWrap").classList.toggle("hidden"); calView = null; renderCal(); };
+$("calPrev").onclick = ()=>{ calView.m--; if (calView.m<1){calView.m=12;calView.y--;} renderCal(); };
+$("calNext").onclick = ()=>{ calView.m++; if (calView.m>12){calView.m=1;calView.y++;} renderCal(); };
+$("calGrid").addEventListener("click", e=>{ const b = e.target.closest("[data-date]"); if (b && !b.disabled) { goDate(b.dataset.date); } });
+$("calToday").onclick = ()=>{ calView = null; goDate(today()); };
+
 /* ---------- writing buddy ---------- */
 function buddy(){ return BUDDIES.find(b=>b.id===state.buddy) || null; }
 function pick(arr, salt){ return arr[(dayNum()+(salt||0)) % arr.length]; }
@@ -533,7 +600,7 @@ function streakCount(){
   const ys = y.getFullYear()+"-"+String(y.getMonth()+1).padStart(2,"0")+"-"+String(y.getDate()).padStart(2,"0");
   return (s.last===today() || s.last===ys) ? s.count : 0;
 }
-function goalWords(){ return d.mode==="chloe" ? 150 : d.mode==="carter" ? 60 : d.mode==="free" ? 40 : 35; }
+function goalWords(){ const c = cfg(); if (c && c.words) return c.words[0]; if (c && c.sentences) return c.sentences[0]*11; return d.mode==="free" ? 40 : 35; }
 let lastCheer = "";
 function cheer(force){
   const b = buddy(); if (!b) return;
@@ -555,16 +622,20 @@ function cheer(force){
 }
 function buddyAnswer(e){
   e = e || d;
+  if (e.mode==="cal") return {about:"", text:refText(e.ref)};
   if (CHALLENGES[e.mode]) return {about:"", text:ANSWERS[e.mode][e.idx]};
   if (e.mode==="daily" && e.pidx!=null) return {about:"", text:ANSWERS.daily[e.lvl ?? 1][e.pidx]};
   if (e.mode==="starter" && e.pidx!=null) return {about:"", text:ANSWERS.starters[e.pidx]};
-  const lvl = +$("level").value, i = dayNum()%12;
-  return {about:"You did a free write, so I wrote about today's prompt: \u201c"+AGE_PROMPTS[lvl][i]+"\u201d", text:ANSWERS.daily[lvl][i]};
+  const [y,mo,da] = today().split("-").map(Number), ce = CALENDAR[mo][da-1], t = refText(ce[2]);
+  if (t) return {about:"You did a free write, so I wrote about today's prompt: \u201c"+ce[1]+"\u201d", text:t};
+  const i = dayNum()%12;
+  return {about:"You did a free write, so I wrote about this: \u201c"+AGE_PROMPTS[1][i]+"\u201d", text:ANSWERS.daily[1][i]};
 }
 function showReveal(animate){
   const b = BUDDIES.find(x=>x.id===(isSaved() && d.buddy ? d.buddy : state.buddy)) || buddy();
   const box = $("reveal"); if (!b) { box.innerHTML=""; return; }
-  const a = buddyAnswer(); if (!a.text) { box.innerHTML=""; return; }
+  const a = buddyAnswer();
+  if (!a.text) { box.dataset.for = d.id || ""; box.innerHTML = '<div class="reveal'+(animate?" pop":"")+'" style="--bc:'+b.color+'"><div class="rh"><img src="buddies/'+b.id+'.jpg" alt=""><div><b>'+esc(b.name)+' is still writing!</b><small>Almost done</small></div></div><p class="txt">I\'m still finishing my entry for this day. Check back soon! I\'m so proud of you for writing today. '+esc(pick(b.close,1))+'</p></div>'; $("peek").classList.add("hidden"); return; }
   const salt = (d.idx ?? d.pidx ?? 0);
   box.dataset.for = d.id || "";
   box.innerHTML = '<div class="reveal'+(animate?" pop":"")+'" style="--bc:'+b.color+'"><div class="rh"><img src="buddies/'+b.id+'.jpg" alt=""><div><b>'+esc(b.name)+' wrote too!</b><small>'+esc(d.kind ? d.kind.charAt(0)+d.kind.slice(1).toLowerCase() : "Today")+'</small></div></div>'+
@@ -606,6 +677,7 @@ $("bgrid").addEventListener("click", e=>{
 });
 document.addEventListener("keydown", e=>{ if (e.key==="Escape" && state.buddy && !$("picker").classList.contains("hidden")) closePicker(); });
 
+if (["daily","chloe","carter"].includes(d.mode) && !d.body.trim()) d = fresh("cal");
 if (d.date!==today() && !d.body.trim() && !d.title) { const m=d.mode; d = fresh(m); }
 render();
 if (!state.buddy) openPicker();
